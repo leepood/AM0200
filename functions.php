@@ -36,6 +36,34 @@ function jazzy_save($post_id) {
     update_post_meta($post_id, 'album', $_POST['album']);
 }
 
+// ADMIN PANL META BOX TOGGLE
+function customadmin() {
+    if ( is_admin() ) {
+        $script = <<< EOF
+<script type='text/javascript'>
+    jQuery(document).ready(function($) {
+        jQuery('#jazzy_id').hide()
+        jQuery('#postexcerpt').show()
+        jQuery('#post-formats-select input').on('change', function() {
+            if (jQuery('#post-format-0').is(':checked')) {
+                jQuery('#jazzy_id').hide()
+                jQuery('#url_box_id').show()
+                jQuery('#postexcerpt').show()
+            }
+            if (jQuery('#post-format-audio').is(':checked')) {
+                jQuery('#jazzy_id').show()
+                jQuery('#url_box_id').hide()
+                jQuery('#postexcerpt').hide()
+            }
+        })
+    });
+</script>
+EOF;
+        echo $script;
+    }
+}
+add_action('admin_footer', 'customadmin');
+
 // REMOVE EDITOR
 function remove_support() {
     remove_post_type_support('post', 'editor');
