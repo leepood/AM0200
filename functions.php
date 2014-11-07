@@ -45,17 +45,28 @@ function customadmin() {
         jQuery('#jazzy_id').hide()
         jQuery('#postexcerpt').show()
         jQuery('#post-formats-select input').on('change', function() {
+            toshow()
+        })
+        toshow()
+        function toshow() {
             if (jQuery('#post-format-0').is(':checked')) {
                 jQuery('#jazzy_id').hide()
                 jQuery('#url_box_id').show()
                 jQuery('#postexcerpt').show()
+                jQuery('#postimagediv').hide()
+                jQuery('#postdivrich').show()
+                jQuery('#wp-content-editor-container').hide()
+                jQuery('#wp-content-editor-tools .wp-editor-tabs').hide()
+                jQuery('#post-status-info').hide()
             }
             if (jQuery('#post-format-audio').is(':checked')) {
                 jQuery('#jazzy_id').show()
                 jQuery('#url_box_id').hide()
                 jQuery('#postexcerpt').hide()
+                jQuery('#postdivrich').hide()
+                jQuery('#postimagediv').show()
             }
-        })
+        }
     });
 </script>
 EOF;
@@ -64,11 +75,13 @@ EOF;
 }
 add_action('admin_footer', 'customadmin');
 
-// REMOVE EDITOR
-function remove_support() {
-    remove_post_type_support('post', 'editor');
-}
-add_action('init', 'remove_support');
+// REMOVE FONT
+function remove_open_sans() {   
+    wp_deregister_style( 'open-sans' );   
+    wp_register_style( 'open-sans', false );   
+    wp_enqueue_style('open-sans','');   
+}   
+add_action( 'init', 'remove_open_sans' );
 
 // MENU SUPPORT
 function register_menu() {

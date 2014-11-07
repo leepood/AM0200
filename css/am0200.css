@@ -44,3 +44,9 @@ html, body {
 .dib {
     display: inline-block;
 }
+
+/* define */
+#primary, section {
+    height: 100%;
+    overflow: hidden;
+}
