@@ -1,4 +1,4 @@
-    <section class="post standard" id="post<?php the_ID(); ?>">
+    <section class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
 <?php $args = array('post_type' => 'attachment', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC', 'post_mime_type' => 'image' ,'post_status' => null, 'post_parent' => $post->ID ); $attachments = get_posts($args); if ($attachments) { ?>
 	<figure>
@@ -13,5 +13,6 @@
 
         <?php the_excerpt(); ?>
 
-        <nav class="hide next"><?php next_post_link('%link'); ?></nav>
+        <?php previous_post_link('%link'); ?>
+
     </section>

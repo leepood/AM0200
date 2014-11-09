@@ -75,6 +75,13 @@ EOF;
 }
 add_action('admin_footer', 'customadmin');
 
+// PREVIOUS LINK ADD CLASS
+add_filter('previous_post_link', 'post_link_attributes');
+function post_link_attributes($output) {
+    $injection = 'class="hide link"';
+    return str_replace('<a href=', '<a '.$injection.' href=', $output);
+}
+
 // REMOVE FONT
 function remove_open_sans() {   
     wp_deregister_style( 'open-sans' );   
