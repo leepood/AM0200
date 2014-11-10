@@ -25,63 +25,127 @@ function sectionMove(position, f) {
     })
 }
 
-function sectionBottom(position, f) {
-    var f = f || function() {};
-    $('body, html').animate({'scrollTop': position}, 250, 'easeInOutQuad', function() {
-        f()
+function sectionBottom(position) {
+    $('#bottom').height(70)
+    $('body, html').animate({'scrollTop': position + 30}, 250, 'easeInOutQuad', function() {
+        $('body, html').animate({'scrollTop': position}, 250, 'easeInOutQuad', function() {
+            $('#bottom').height(0)
+        })
     })
+}
+
+function sectionTop() {
+    $('#top').height(0)     /* need to define 0px */
+    $('#top').animate({'height': 30}, 250, 'easeInOutQuad', function() {
+        $('#top').animate({'height': 0}, 250, 'easeInOutQuad')
+    })
+}
+
+function pState(url, title, position) {
+    history.pushState({ url: url, title: title, position: position }, title, url)
+    document.title = title;
 }
 
 // define
 var postid,                         // current post id
-    url;                            // ajax load url
+    url,                            // ajax load url
 
-var totalpost = 0,                  // total post section
-    position = 0;                   // section position
+    loadpost = 3,                   // define preload post number
 
-var hometitle;
-var currentstate = [],              // current url title
-    historystates = new Array;      // history states
+    totalpost = 0,                  // total post section
+    position = 0,                   // section position
 
-var urlpath = location.pathname;    // if to load more
+    currenturl,                     // current url
+    currenttitle,                   // current title
 
+    historystates = new Array,      // history states
+
+    hometitle = document.title.indexOf(' ') != -1 ? document.title.split(' ')[0] : document.title,
+    urlpath = location.pathname,    // if to load more
+
+    postnumber = 0,                 // load post number
+
+    scrollmark = true;              // can scroll mark
+
+// ready !
 $(function($) {
 
+    // replace current history state
+    currenturl = $('.post').find('.entry').attr('href');
+    currenttitle = hometitle +' - '+ $('.post').find('.entry').attr('title');
+    history.replaceState({ url: currenturl, title: currenttitle, position: 0 }, currenttitle, currenturl)
+    document.title = currenttitle;
+
+    // save current history state
+    historystates.push([currenturl, currenttitle])
+
+    // get current post id and to load url 
+    postid = $('.post').data('id');
+    url = $('#post'+ postid).find('.link').attr('href');
+    // ajax load post
+    if (url && urlpath == '/') toLoad();
+
+    // page move down
+    function sectionDown() {
+        if (url && urlpath == '/') toLoad();
+        if (position < totalpost) {
+            position ++;
+            sectionMove(position * window.innerHeight, function() {
+                pState(historystates[position][0], historystates[position][1], position)
+            })
+        } else {
+            sectionBottom(position * window.innerHeight)
+        }
+    }
+
+    // page move up
+    function sectionUp() {
+        if (position >= 1) { 
+            position --;
+            sectionMove(position * window.innerHeight, function() {
+                pState(historystates[position][0], historystates[position][1], position)
+            })
+        } else {
+            sectionTop()
+        }
+    }
+
+    // ajax load post
+    function toLoad() {
+        if (postnumber > (loadpost - 1)) { 
+            postnumber --;
+            return;
+        }
+
+        ajaxLoad(url, function(data) {
+            postnumber ++;
+            totalpost ++;
+
+            var data = $(data).filter('section');
+            $('#post'+ postid).after(data)
+
+            postid = data.data('id');
+            url = $('#post'+ postid).find('.link').attr('href') || '';
+
+            var posturl = $('#post'+ postid).find('.entry').attr('href'),
+                posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
+
+            historystates.push([posturl, posttitle])    // save post state
+
+            if (url) toLoad();
+        })
+    }
+
+    // keyboard event
     $(document).on('keydown', function(e) {
         switch (e.keyCode) {
 
             case 40:    // down
-                if (url && urlpath == '/') toLoad();
-                if (position < totalpost) {
-                    position ++;
-                    sectionMove(position * window.innerHeight)
-
-                    history.pushState({ url: historystates[position][0], title: historystates[position][1], position: position }, historystates[position][1], historystates[position][0])
-                    document.title = historystates[position][1];
-
-                } else {
-                    $('#bottom').height(70)
-                    sectionBottom(position * window.innerHeight + 30, function() {
-                        sectionBottom(position * window.innerHeight, function() {
-                            $('#bottom').height(0)
-                        })
-                    })
-                }
+                sectionDown()
             break;
 
             case 38:    // up
-                if (position >= 1) { 
-                    position --;
-                    sectionMove(position * window.innerHeight)
-
-                    history.pushState({ url: historystates[position][0], title: historystates[position][1], position: position }, historystates[position][1], historystates[position][0])
-                    document.title = historystates[position][1];
-                } else {
-                    $('#top').height(0)     /* need to define 0px */
-                    $('#top').animate({'height': 30}, 250, 'easeInOutQuad', function() {
-                        $('#top').animate({'height': 0}, 250, 'easeInOutQuad')
-                    })
-                }
+                sectionUp()
             break;
 
             case 39:    // right
@@ -97,57 +161,20 @@ $(function($) {
         }
     })
 
-    postid = $('.post').data('id');
-    url = $('#post'+ postid).find('.link').attr('href');
-
-    hometitle = document.title.indexOf(' ') != -1 ? document.title.split(' ')[0] : document.title;
-    currentstate.url = $('.post').find('.entry').attr('href');
-    currentstate.title = hometitle +' - '+ $('.post').find('.entry').attr('title');
-    history.replaceState({ url: currentstate.url, title: currentstate.title, position: 0 }, currentstate.title, currentstate.url)
-    document.title = currentstate.title;
-
-    historystates.push([currentstate.url, currentstate.title])
-
-    if (url && urlpath == '/') toLoad();
-    var num = 0;
-    function toLoad() {
-        
-        if (num > 2) { 
-            num --;
-            return;
-        }
-
-        ajaxLoad(url, function(data) {
-            num ++;
-            totalpost ++;
-
-            var data = $(data).filter('section');
-            $('#post'+ postid).after(data)
-
-            postid = data.data('id');
-            url = $('#post'+ postid).find('.link').attr('href') || '';
-
-            var posturl = $('#post'+ postid).find('.entry').attr('href'),
-                posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
-            historystates.push([posturl, posttitle])
-
-            if (url) toLoad();
-        })
-    }
-
+    // popstate event
     window.addEventListener('popstate', function(e) {
         var states = e.state;
 
-        if (!states) return;
+        if (!states) return;    // chrome
 
-        if (urlpath != '/') location.href = '/';
+        if (urlpath != '/') location.href = '/';    // not home page reload
 
         document.title = states.title;
 
         sectionMove(states.position * window.innerHeight)
     })
 
-    var scrollmark = true;
+    // mousescroll event
     $('body').on('mousewheel DOMMouseScroll', function(e) {
         e.preventDefault()
         var data = e.originalEvent.wheelDelta || e.originalEvent.detail * -1;
@@ -159,36 +186,10 @@ $(function($) {
             scrollmark = false;
 
             if (data < 0) {     // down
-                if (url && urlpath == '/') toLoad();
-                if (position < totalpost) {
-                    position ++;
-                    sectionMove(position * window.innerHeight)
-
-                    history.pushState({ url: historystates[position][0], title: historystates[position][1], position: position }, historystates[position][1], historystates[position][0])
-                    document.title = historystates[position][1];
-
-                } else {
-                    $('#bottom').height(70)
-                    sectionBottom(position * window.innerHeight + 30, function() {
-                        sectionBottom(position * window.innerHeight, function() {
-                            $('#bottom').height(0)
-                        })
-                    })
-                }
+                sectionDown()
             }
             if (data > 0) {     // up
-                if (position >= 1) { 
-                    position --;
-                    sectionMove(position * window.innerHeight)
-
-                    history.pushState({ url: historystates[position][0], title: historystates[position][1], position: position }, historystates[position][1], historystates[position][0])
-                    document.title = historystates[position][1];
-                } else {
-                    $('#top').height(0)     /* need to define 0px */
-                    $('#top').animate({'height': 30}, 250, 'easeInOutQuad', function() {
-                        $('#top').animate({'height': 0}, 250, 'easeInOutQuad')
-                    })
-                }
+                sectionUp()
             }
 
             setTimeout(function() {scrollmark = true}, time)
