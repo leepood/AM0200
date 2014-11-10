@@ -33,13 +33,15 @@ function sectionBottom(position, f) {
 }
 
 // define
-var postid,                 // current post id
-    url;                    // ajax load url
+var postid,                         // current post id
+    url;                            // ajax load url
 
-var totalpost = 0,          // total post section
-    position = 0;           // section position
+var totalpost = 0,                  // total post section
+    position = 0;                   // section position
 
-var currenturl = window.document.location;
+var hometitle;
+var currentstate = [],              // current url title
+    historystates = new Array;      // history states
 
 $(function($) {
 
@@ -52,7 +54,9 @@ $(function($) {
                     position ++;
                     sectionMove(position * window.innerHeight)
 
-                    log(url +'***'+ postid)
+                    history.pushState({ url: historystates[position][0], title: historystates[position][1] }, historystates[position][1], historystates[position][0])
+                    document.title = historystates[position][1];
+
                 } else {
                     $('#bottom').height(70)
                     sectionBottom(position * window.innerHeight + 30, function() {
@@ -67,6 +71,9 @@ $(function($) {
                 if (position >= 1) { 
                     position --;
                     sectionMove(position * window.innerHeight)
+
+                    history.pushState({ url: historystates[position][0], title: historystates[position][1] }, historystates[position][1], historystates[position][0])
+                    document.title = historystates[position][1];
                 } else {
                     $('#top').height(0)     /* need to define 0px */
                     $('#top').animate({'height': 30}, 250, 'easeInOutQuad', function() {
@@ -87,7 +94,15 @@ $(function($) {
     postid = $('.post').data('id');
     url = $('#post'+ postid).find('.link').attr('href');
 
-    toLoad()
+    hometitle = document.title.indexOf(' ') != -1 ? document.title.split(' ')[0] : document.title;
+    currentstate.url = $('.post').find('.entry').attr('href');
+    currentstate.title = hometitle +' - '+ $('.post').find('.entry').attr('title');
+    history.replaceState({ url: currentstate.url, title: currentstate.title }, currentstate.title, currentstate.url)
+    document.title = currentstate.title;
+
+    historystates.push([currentstate.url, currentstate.title])
+
+    if (url) toLoad();
     var num = 0;
     function toLoad() {
         
@@ -105,6 +120,10 @@ $(function($) {
 
             postid = data.data('id');
             url = $('#post'+ postid).find('.link').attr('href') || '';
+
+            var posturl = $('#post'+ postid).find('.entry').attr('href'),
+                posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
+            historystates.push([posturl, posttitle])
 
             if (url) toLoad();
         })

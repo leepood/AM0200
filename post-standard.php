@@ -7,7 +7,7 @@
 	</figure>
 <?php } ?>
 
-        <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"></a>
+        <a class="entry" href="<?php the_permalink() ?>" title="<?php the_title(); ?>"></a>
 
         <?php echo get_post_meta( $post->ID, 'origin_url', true ); ?>
 
