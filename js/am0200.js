@@ -101,6 +101,8 @@ var postid,                         // current post id
 
     loadpost = 3,                   // define preload posts
 
+    canload = true,                 // ajax can load mark
+
     totalpost = 0,                  // total post section
     position = 0,                   // section position
 
@@ -144,7 +146,7 @@ $(function($) {
 
     // page move down
     function sectionDown() {
-        if (url && urlpath == '/') toLoad();
+        if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
         if (position < totalpost) {
             position ++;
             sectionMove(position * window.innerHeight, function() {
@@ -169,17 +171,24 @@ $(function($) {
 
     // ajax load post
     function toLoad() {
+        if (!canload) return;
+        canload = false; 
+
         if (postnumber > (loadpost - 1)) { 
             postnumber --;
+            canload = true;
             return;
         }
 
         ajaxLoad(url, function(data) {
             postnumber ++;
-            totalpost ++;
 
             var data = $(data).filter('section');
             $('#post'+ postid).after(data)
+
+            totalpost ++;
+            
+            canload = true;
 
             postid = data.data('id');
             url = $('#post'+ postid).find('.link').attr('href') || '';
