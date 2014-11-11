@@ -55,3 +55,9 @@ section {
     overflow: hidden;
     background: grey;
 }
+#pot {
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+    visibility: hidden;
+}

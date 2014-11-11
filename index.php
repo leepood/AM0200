@@ -5,5 +5,6 @@
 <?php get_template_part( 'post', $format ); ?>
 <?php endif; endwhile; endif; ?>
 <div id="bottom"></div>
+<div id="pot"></div>
 
 <?php get_footer(); ?>

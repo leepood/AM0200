@@ -5,13 +5,13 @@
  */
 
 function ajaxLoad(url, f) {
-	$.ajax({
-		type: 'GET',
-		url: url,
-		timeout: 7000,
-		success: function(data) {f(data)},
-		error: function() {window.location.href = url}
-	})
+    $.ajax({
+        type: 'GET',
+        url: url,
+        timeout: 7000,
+        success: function(data) {f(data)},
+        error: function() {window.location.href = url}
+    })
 }
 
 function log(s) {
@@ -46,11 +46,60 @@ function pState(url, title, position) {
     document.title = title;
 }
 
+function tapPlot(tag, target, f) {
+    $(tag).hammer({
+        prevent_default: true
+    }).on('tap', function(e) {
+        var ex = e.position[0].x,
+            ey = e.position[0].y;
+        
+        $(target).css({
+            'visibility': 'visible',
+            'width': '30px',
+            'height': '30px',
+            'left': ex - 15 +'px',
+            'top': ey - 15 +'px',
+            opacity: 0.4
+        }).animate({
+            height: '40px',
+            width: '40px',
+            opacity: 0,
+            left: '-='+ 5 +'px',
+            top: '-='+ 5 +'px'
+        }, 300, function() {
+            $(target).css('visibility', 'hidden')
+        })
+
+        //if (!e.target.id) return;
+
+        f(ey / window.innerHeight)
+    })
+}
+
+function cursorChange(dir) {
+    var cursor = 'default';
+    switch (dir) {
+        case 'up':
+            cursor = 'n-resize';
+        break;
+        case 'down':
+            cursor = 's-resize';
+        break;
+        case 'left':
+            cursor = 'w-resize';
+        break;
+        case 'right':
+            cursor = 'e-resize';
+        break;
+    }
+    $('body').css('cursor', cursor)
+} 
+
 // define
 var postid,                         // current post id
     url,                            // ajax load url
 
-    loadpost = 3,                   // define preload post number
+    loadpost = 3,                   // define preload posts
 
     totalpost = 0,                  // total post section
     position = 0,                   // section position
@@ -65,6 +114,7 @@ var postid,                         // current post id
 
     postnumber = 0,                 // load post number
 
+    mousemark = true,               // mousemove mark
     scrollmark = true;              // can scroll mark
 
 // ready !
@@ -84,6 +134,13 @@ $(function($) {
     url = $('#post'+ postid).find('.link').attr('href');
     // ajax load post
     if (url && urlpath == '/') toLoad();
+
+    // on screen size change
+    $(window).on('resize orientationchange', function(){
+        setTimeout(function() {
+            sectionMove(position * window.innerHeight)
+        }, 0)
+    })
 
     // page move down
     function sectionDown() {
@@ -194,6 +251,39 @@ $(function($) {
 
             setTimeout(function() {scrollmark = true}, time)
         }
+    })
+
+    // mouse move event
+    $(document).on('mousemove', function(e) {
+        if (urlpath != '/') return;
+        if (mousemark) {
+            mousemark = false;
+            setTimeout(function() {mousemark = true;}, 100)
+
+            var e = e.offsetY / window.innerHeight;
+            if (e > 0.7) {
+                if (position == totalpost) {
+                    cursorChange('default')
+                } else {
+                    cursorChange('down')
+                }
+            } else if (e < 0.3) {
+                if (position == 0) {
+                    cursorChange('default')
+                } else {
+                    cursorChange('up')
+                }
+            } else {
+                cursorChange('default')
+            }
+        }
+    })
+
+    // on click || tap
+    tapPlot('body', '#pot', function(e) {
+        e = e - Math.floor(e);
+        if (e > 0.7) sectionDown();
+        if (e < 0.3) sectionUp();
     })
 
 })
