@@ -35,6 +35,38 @@ html, body {
 }
 body {
     overflow: hidden;
+    position: relative;
+}
+body:before, body:after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: 3px solid #d2d2d2;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    margin-left: -18px;
+    top: 50%;
+    margin-top: -18px;
+}
+body:after {
+    border: 3px solid transparent;
+    border-top-color: grey;
+    -webkit-animation: rotate 0.7s infinite linear;
+    -moz-animation: rotate linear 0.7s;
+    -moz-animation-iteration-count: infinite;
+}
+@-webkit-keyframes rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes rotate {
+    0% { -moz-transform:  rotate(0deg); }
+    100% { -moz-transform:  rotate(360deg); }
 }
 
 /* class */
@@ -53,10 +85,9 @@ section {
     height: 100%;
     position: relative;
     overflow: hidden;
-    background: grey;
 }
 #pot {
-    background: #fff;
+    background: grey;
     position: absolute;
     border-radius: 50%;
     visibility: hidden;

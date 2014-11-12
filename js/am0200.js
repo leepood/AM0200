@@ -8,7 +8,7 @@ function ajaxLoad(url, f) {
     $.ajax({
         type: 'GET',
         url: url,
-        timeout: 7000,
+        timeout: 10000,
         success: function(data) {f(data)},
         error: function() {window.location.href = url}
     })
@@ -20,7 +20,7 @@ function log(s) {
 
 function sectionMove(position, f) {
     var f = f || function() {};
-    $('body, html').animate({'scrollTop': position}, 700, 'easeInOutQuint', function() {
+    $('body, html').animate({'scrollTop': position}, 1000, 'easeInOutQuint', function() {
         f()
     })
 }
@@ -149,6 +149,11 @@ $(function($) {
 
     // tap or click
     onTap('#post'+ postid)
+
+    // show ajax loading
+    $(document).ajaxSend(function() {
+    }).ajaxComplete(function() {
+    })
 
     // resize page
     function resizePage() {
