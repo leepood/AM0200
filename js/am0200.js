@@ -122,6 +122,11 @@ var postid,                         // current post id
 // ready !
 $(function($) {
 
+    // to top
+    window.scrollTo(0, 0)
+    $('.post').css('top', 0)
+    setTimeout(resizePage, 0)
+
     // replace current history state
     currenturl = $('.post').find('.entry').attr('href');
     currenttitle = hometitle +' - '+ $('.post').find('.entry').attr('title');
@@ -139,10 +144,17 @@ $(function($) {
 
     // on screen size change
     $(window).on('resize orientationchange', function(){
-        setTimeout(function() {
-            sectionMove(position * window.innerHeight)
-        }, 0)
+        setTimeout(resizePage, 0)
     })
+
+    // tap or click
+    onTap('#post'+ postid)
+
+    // resize page
+    function resizePage() {
+        $('.post').height(window.innerHeight)
+        sectionMove(position * window.innerHeight)
+    }
 
     // page move down
     function sectionDown() {
@@ -169,6 +181,15 @@ $(function($) {
         }
     }
 
+    // mouse click or tap event
+    function onTap(id) {
+        tapPlot(id, '#pot', function(e) {
+            e = e - Math.floor(e);
+            if (e > 0.7) sectionDown();
+            if (e < 0.3) sectionUp();
+        })
+    }
+
     // ajax load post
     function toLoad() {
         if (!canload) return;
@@ -192,6 +213,10 @@ $(function($) {
 
             postid = data.data('id');
             url = $('#post'+ postid).find('.link').attr('href') || '';
+
+            onTap('#post'+ postid)
+
+            $('#post'+ postid).height(window.innerHeight)
 
             var posturl = $('#post'+ postid).find('.entry').attr('href'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
@@ -288,11 +313,27 @@ $(function($) {
         }
     })
 
-    // on click || tap
-    tapPlot('body', '#pot', function(e) {
-        e = e - Math.floor(e);
-        if (e > 0.7) sectionDown();
-        if (e < 0.3) sectionUp();
+    // swipe event
+    $('html').hammer({
+        prevent_default: true
+    }).on('swipe', function(e) {
+        switch (e.direction) {
+
+            case 'up':
+                sectionDown()
+            break;
+
+            case 'down':
+                sectionUp()
+            break;
+
+            case 'left':
+            break;
+
+            case 'right':
+            break;
+
+        }
     })
 
 })
