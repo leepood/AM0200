@@ -130,24 +130,6 @@ $(function($) {
     $('.post').css('top', 0)
     setTimeout(resizePage, 0)
 
-    // show content
-    var imgs = $('.post').find('img');
-    if (imgs.length) {
-        var imgloaded = 0;
-        imgs.each(function() {
-            var img = $(this);
-            $('<img/>').attr("src", img.attr('src')).load(function() {
-                img.animate({'opacity': 1}, 200, 'ease')
-                imgloaded ++;
-                if (imgloaded >= imgs.length) {
-                    $('.post').css('visibility', 'visible')
-                }
-            })
-        })
-    } else {
-        $('.post').css('visibility', 'visible')
-    }
-
     // replace current history state
     currenturl = $('.post').find('.entry').attr('href');
     currenttitle = hometitle +' - '+ $('.post').find('.entry').attr('title');
@@ -160,8 +142,35 @@ $(function($) {
     // get current post id and to load url 
     postid = $('.post').data('id');
     url = $('#post'+ postid).find('.link').attr('href');
-    // ajax load post
-    if (url && urlpath == '/') toLoad();
+
+    // show content
+    var imgs = $('.post').find('img');
+    if (imgs.length) {
+        var imgloaded = 0;
+        imgs.each(function() {
+            var img = $(this);
+            $('<img/>').attr("src", img.attr('src')).load(function() {
+                img.animate({'opacity': 1}, 200, 'ease')
+                imgloaded ++;
+                if (imgloaded >= imgs.length) {
+                    setTimeout(function() {
+                        $('.post').animate({'opacity': 1}, 200, 'ease')
+
+                        // ajax load post
+                        if (url && urlpath == '/') toLoad();
+                    }, 1000)
+                }
+            }).error(function() {
+                imgloaded ++;
+            })
+        })
+    } else {
+        setTimeout(function() {
+            $('.post').animate({'opacity': 1}, 200, 'ease')
+            // ajax load post
+            if (url && urlpath == '/') toLoad();
+        }, 1000)
+    }
 
     // on screen size change
     $(window).on('resize orientationchange', function(){
@@ -238,7 +247,7 @@ $(function($) {
 
             onTap('#post'+ postid)
 
-            $('#post'+ postid).height(window.innerHeight).css('visibility', 'visible')
+            $('#post'+ postid).height(window.innerHeight).css('opacity', 1)
 
             var posturl = $('#post'+ postid).find('.entry').attr('href'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
