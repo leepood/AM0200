@@ -4,12 +4,12 @@
  * URL: http://lorem.in
  */
 
-function ajaxLoad(url, f, error) {
+function ajaxLoad(url, callback, error) {
     $.ajax({
         type: 'GET',
         url: url,
         timeout: 7000,
-        success: function(data) {f(data)},
+        success: function(data) {callback(data)},
         error: function() {error()}
     })
 }
@@ -122,13 +122,31 @@ var postid,                         // current post id
 // ready !
 $(function($) {
 
+    // some tag
+    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
+
     // to top
     window.scrollTo(0, 0)
     $('.post').css('top', 0)
     setTimeout(resizePage, 0)
 
-    // some tag
-    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
+    // show content
+    var imgs = $('.post').find('img');
+    if (imgs.length) {
+        var imgloaded = 0;
+        imgs.each(function() {
+            var img = $(this);
+            $('<img/>').attr("src", img.attr('src')).load(function() {
+                img.animate({'opacity': 1}, 200, 'ease')
+                imgloaded ++;
+                if (imgloaded >= imgs.length) {
+                    $('.post').css('visibility', 'visible')
+                }
+            })
+        })
+    } else {
+        $('.post').css('visibility', 'visible')
+    }
 
     // replace current history state
     currenturl = $('.post').find('.entry').attr('href');
@@ -152,13 +170,6 @@ $(function($) {
 
     // tap or click
     onTap('#post'+ postid)
-
-    // show ajax loading
-    $(document).ajaxSend(function() {
-        $('#loading').show()
-    }).ajaxComplete(function() {
-        $('#loading').hide()
-    })
 
     // resize page
     function resizePage() {
@@ -211,6 +222,7 @@ $(function($) {
             return;
         }
 
+        $('#loading').show()
         ajaxLoad(url, function(data) {
             postnumber ++;
 
@@ -226,12 +238,29 @@ $(function($) {
 
             onTap('#post'+ postid)
 
-            $('#post'+ postid).height(window.innerHeight)
+            $('#post'+ postid).height(window.innerHeight).css('visibility', 'visible')
 
             var posturl = $('#post'+ postid).find('.entry').attr('href'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
 
             historystates.push([posturl, posttitle])    // save post state
+
+            var imgs = $('#post'+ postid).find('img');
+            if (imgs.length) {
+                var imgloaded = 0;
+                imgs.each(function() {
+                    var img = $(this);
+                    $('<img/>').attr("src", img.attr('src')).load(function() {
+                        img.animate({'opacity': 1}, 200, 'ease')
+                        imgloaded ++;
+                        if (imgloaded >= imgs.length) {
+                            setTimeout(function() {$('#loading').hide()}, 1000)
+                        }
+                    })
+                })
+            } else {
+                setTimeout(function() {$('#loading').hide()}, 1000)
+            }
 
             if (url) toLoad();
         }, function() {
