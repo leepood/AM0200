@@ -92,3 +92,26 @@ section {
     border-radius: 50%;
     visibility: hidden;
 }
+#loading {
+    width: 14px;
+    height: 14px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    background: grey;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-animation:loading 2s ease-out forwards infinite;
+    -moz-animation:loading 2s ease-out forwards infinite;
+}
+@-webkit-keyframes loading {
+  0% { -webkit-transform:scale(0.3); }
+  50% { -webkit-transform:scale(1.0); }
+  100% { -webkit-transform:scale(0.3); }
+}
+@-moz-keyframes loading {
+  0% { -moz-transform:scale(0.3); }
+  50% { -moz-transform:scale(1.0); }
+  100% { -moz-transform:scale(0.3); }
+}

@@ -4,13 +4,13 @@
  * URL: http://lorem.in
  */
 
-function ajaxLoad(url, f) {
+function ajaxLoad(url, f, error) {
     $.ajax({
         type: 'GET',
         url: url,
-        timeout: 10000,
+        timeout: 7000,
         success: function(data) {f(data)},
-        error: function() {window.location.href = url}
+        error: function() {error()}
     })
 }
 
@@ -127,6 +127,9 @@ $(function($) {
     $('.post').css('top', 0)
     setTimeout(resizePage, 0)
 
+    // some tag
+    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
+
     // replace current history state
     currenturl = $('.post').find('.entry').attr('href');
     currenttitle = hometitle +' - '+ $('.post').find('.entry').attr('title');
@@ -152,7 +155,9 @@ $(function($) {
 
     // show ajax loading
     $(document).ajaxSend(function() {
+        $('#loading').show()
     }).ajaxComplete(function() {
+        $('#loading').hide()
     })
 
     // resize page
@@ -229,6 +234,9 @@ $(function($) {
             historystates.push([posturl, posttitle])    // save post state
 
             if (url) toLoad();
+        }, function() {
+            canload = true;
+            toLoad()
         })
     }
 
