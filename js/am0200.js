@@ -93,7 +93,15 @@ function cursorChange(dir) {
         break;
     }
     $('body').css('cursor', cursor)
-} 
+}
+
+function arrowFlash(id) {
+    $('#arrow div').removeClass('active')
+    $(id).addClass('active')
+    setTimeout(function() {
+        $(id).removeClass('active')
+    }, 200)
+}
 
 // define
 var postid,                         // current post id
@@ -123,7 +131,7 @@ var postid,                         // current post id
 $(function($) {
 
     // some tag
-    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
+    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
 
     // to top
     window.scrollTo(0, 0)
@@ -284,10 +292,12 @@ $(function($) {
 
             case 40:    // down
                 sectionDown()
+                arrowFlash('#arrow .bottom')
             break;
 
             case 38:    // up
                 sectionUp()
+                arrowFlash('#arrow .top')
             break;
 
             case 39:    // right

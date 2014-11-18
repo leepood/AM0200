@@ -5,6 +5,7 @@
         <?php echo get_post_meta( $post->ID, 'name', true ); ?>
         <?php echo get_post_meta( $post->ID, 'author', true ); ?>
         <?php echo get_post_meta( $post->ID, 'album', true ); ?>
+        <?php echo get_post_meta( $post->ID, 'audiourl', true ); ?>
 
         <?php previous_post_link('%link'); ?>
         <a class="entry" href="<?php the_permalink() ?>" title="<?php the_title(); ?>"></a>
