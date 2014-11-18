@@ -1,4 +1,13 @@
-    <section class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
+<?php 
+$prev = get_adjacent_post(false,'',true);
+if (is_object($prev)) {
+    $previous = get_permalink($prev);
+} else {
+    $previous = '';
+}
+?>
+
+    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
 <?php $args = array('post_type' => 'attachment', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC', 'post_mime_type' => 'image' ,'post_status' => null, 'post_parent' => $post->ID ); $attachments = get_posts($args); if ($attachments) { ?>
 	<figure>
@@ -10,8 +19,5 @@
         <?php echo get_post_meta( $post->ID, 'origin_url', true ); ?>
 
         <?php the_excerpt(); ?>
-
-        <?php previous_post_link('%link'); ?>
-        <a class="entry" href="<?php the_permalink() ?>" title="<?php the_title(); ?>"></a>
 
     </section>

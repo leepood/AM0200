@@ -13,5 +13,8 @@
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> rss feed" href="<?php bloginfo('rss2_url') ?>" />
 <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/am0200.css" />
+<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/plugin.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/am0200.js"></script>
 </head>
 <body data-posts="<?php $count_posts = wp_count_posts(); echo $published_posts = $count_posts->publish;?>">

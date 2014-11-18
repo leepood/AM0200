@@ -4,4 +4,5 @@
 <?php get_template_part( 'post', $format ); ?>
 <?php endif; endwhile; endif; ?>
 
-<?php get_footer(); ?>
+</body>
+</html>

@@ -139,8 +139,8 @@ $(function($) {
     setTimeout(resizePage, 0)
 
     // replace current history state
-    currenturl = $('.post').find('.entry').attr('href');
-    currenttitle = hometitle +' - '+ $('.post').find('.entry').attr('title');
+    currenturl = $('.post').data('link');
+    currenttitle = hometitle +' - '+ $('.post').data('title');
     history.replaceState({ url: currenturl, title: currenttitle, position: 0 }, currenttitle, currenturl)
     document.title = currenttitle;
 
@@ -149,7 +149,7 @@ $(function($) {
 
     // get current post id and to load url 
     postid = $('.post').data('id');
-    url = $('#post'+ postid).find('.link').attr('href');
+    url = $('#post'+ postid).data('prev');
 
     // show content
     var imgs = $('.post').find('img');
@@ -251,14 +251,14 @@ $(function($) {
             canload = true;
 
             postid = data.data('id');
-            url = $('#post'+ postid).find('.link').attr('href') || '';
+            url = $('#post'+ postid).data('prev');
 
             onTap('#post'+ postid)
 
             $('#post'+ postid).height(window.innerHeight).css('opacity', 1)
 
-            var posturl = $('#post'+ postid).find('.entry').attr('href'),
-                posttitle = hometitle +' - '+ $('#post'+ postid).find('.entry').attr('title');
+            var posturl = $('#post'+ postid).data('link'),
+                posttitle = hometitle +' - '+ $('#post'+ postid).data('title');
 
             historystates.push([posturl, posttitle])    // save post state
 
