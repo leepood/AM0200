@@ -16,6 +16,8 @@ if (is_object($prev)) {
         <?php echo get_post_meta( $post->ID, 'author', true ); ?>
         <?php echo get_post_meta( $post->ID, 'album', true ); ?>
 
+        <canvas class="blur"></canvas>
+
         <audio class="hide" preload="auto" id="audio<?php the_ID(); ?>" src="<?php echo get_post_meta( $post->ID, 'audiourl', true ); ?>"></audio>
 
     </section>

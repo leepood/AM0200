@@ -103,6 +103,34 @@ function arrowFlash(id) {
     }, 200)
 }
 
+function canvasBlur(ele, img) {
+    this.element = ele;
+    this.image = img;
+
+    this.element.width = this.image.width;
+    this.element.height = this.image.height;
+
+    this.context = this.element.getContext('2d');
+    
+    this.context.drawImage(this.image,0,0)
+}
+
+canvasBlur.prototype.blur = function(i) {
+    this.context.globalAlpha = 0.5;
+
+    for (var y = -i; y <= i; y += 2) {
+        for (var x = -i; x <= i; x += 2) {
+            this.context.drawImage(this.element, x + 1, y + 1)
+
+            if (x >= 0 && y >= 0) {
+                this.context.drawImage(this.element, -(x-1), -(y-1))
+            }
+        }
+    }
+
+    this.context.globalAlpha = 1;
+}
+
 // define
 var postid,                         // current post id
     url,                            // ajax load url
@@ -163,6 +191,12 @@ $(function($) {
                 if (imgloaded >= imgs.length) {
                     setTimeout(function() {
                         $('.post').animate({'opacity': 1}, 200, 'ease')
+
+                        // blur img
+                        if ($('.post').hasClass('audio')) {
+                            var bg = new canvasBlur($('.blur')[0], $('.audio img')[0]);
+			                bg.blur(4)
+                        }
 
                         // ajax load post
                         if (url && urlpath == '/') toLoad();
@@ -272,6 +306,13 @@ $(function($) {
                         imgloaded ++;
                         if (imgloaded >= imgs.length) {
                             setTimeout(function() {$('#loading').hide()}, 1000)
+
+                            // blur img
+                            if ($('#post'+ postid).hasClass('audio')) {
+                                var bg = new canvasBlur($('#post'+ postid).find('.blur')[0], $('#post'+ postid).find('img')[0]);
+			                    bg.blur(4)
+                            }
+
                         }
                     })
                 })
