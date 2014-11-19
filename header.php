@@ -11,7 +11,8 @@
 <meta name="keywords" content="design, picture, am0200, inspiration, illustrator, web design, music, jazzy" />
 <meta name="description" content="<?php bloginfo('description') ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> rss feed" href="<?php bloginfo('rss2_url') ?>" />
-<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/font.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/am0200.css" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/plugin.js"></script>

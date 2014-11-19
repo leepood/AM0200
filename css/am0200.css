@@ -25,6 +25,7 @@ header, footer, section, figure {
 }
 img {
     display: block;
+    height: auto;
 }
 html, body {
     background: #fff;
@@ -36,6 +37,7 @@ html, body {
 body {
     overflow: hidden;
     position: relative;
+    font-family: 'open_sans';
 }
 body:before, body:after {
     content: '';
@@ -192,3 +194,26 @@ img {
     margin-right: 3px;
 }
 
+.post404 img {
+    margin-top: 8%;
+    width: 80px;
+    margin-left: 4%;
+    vertical-align: top;
+}
+.post404 > div {
+    margin-left: 1%;
+    margin-top: 8%;
+    vertical-align: top;
+}
+.post404 h2 {
+    font-size: 20px;
+    color: #333;
+}
+.post404 p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+.post404 a {
+    color: #222;
+}

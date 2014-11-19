@@ -139,7 +139,7 @@ $(function($) {
     setTimeout(resizePage, 0)
 
     // replace current history state
-    currenturl = $('.post').data('link');
+    currenturl = $('.post').data('link') || window.location.href;
     currenttitle = hometitle +' - '+ $('.post').data('title');
     history.replaceState({ url: currenturl, title: currenttitle, position: 0 }, currenttitle, currenturl)
     document.title = currenttitle;
@@ -186,7 +186,7 @@ $(function($) {
     })
 
     // tap or click
-    onTap('#post'+ postid)
+    onTap('.post')
 
     // resize page
     function resizePage() {
