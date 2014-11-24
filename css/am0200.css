@@ -27,8 +27,11 @@ img {
     display: block;
     height: auto;
 }
+audio {
+    display: none;
+}
 html, body {
-    background: #fff;
+    background: #f2f0f0;
     height: 100%;
     font-size: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -71,28 +74,17 @@ body:after {
     100% { -moz-transform:  rotate(360deg); }
 }
 
-/* class */
-.hide {
-    display: none;
-}
-.db {
-    display: block;
-}
-.dib {
-    display: inline-block;
-}
-
 /* define */
 section {
     height: 100%;
+    background: #f2f0f0;
     position: relative;
     overflow: hidden;
     opacity: 0;
-    background: #fff;
     z-index: 1;
 }
 #pot {
-    background: grey;
+    background: #0074a2;
     position: absolute;
     border-radius: 50%;
     visibility: hidden;
@@ -196,14 +188,16 @@ img {
 
 .post404 img {
     margin-top: 8%;
-    width: 80px;
     margin-left: 4%;
     vertical-align: top;
+    display: inline-block;
+    transform: scale(.5);
 }
 .post404 > div {
     margin-left: 1%;
     margin-top: 8%;
     vertical-align: top;
+    display: inline-block;
 }
 .post404 h2 {
     font-size: 20px;

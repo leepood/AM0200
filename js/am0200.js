@@ -131,6 +131,21 @@ canvasBlur.prototype.blur = function(i) {
     this.context.globalAlpha = 1;
 }
 
+function fullImage(id, w, h) {
+	var _height = window.innerHeight,
+	    _width = window.innerWidth,
+        ratio = h / w;
+
+	if (_height / _width > ratio) {
+		$(id).height(_height).width(_height / ratio)
+	} else {
+		$(id).width(_width).height(_width * ratio)
+	}
+
+	$(id).css('left', (_width - $(id).width()) / 2)
+    $(id).css('top', (_height - $(id).height()) / 2)
+}
+
 // define
 var postid,                         // current post id
     url,                            // ajax load url
@@ -194,7 +209,7 @@ $(function($) {
 
                         // blur img
                         if ($('.post').hasClass('audio')) {
-                            var bg = new canvasBlur($('.blur')[0], $('.audio img')[0]);
+                            var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
 			                bg.blur(4)
                         }
 
@@ -309,7 +324,7 @@ $(function($) {
 
                             // blur img
                             if ($('#post'+ postid).hasClass('audio')) {
-                                var bg = new canvasBlur($('#post'+ postid).find('.blur')[0], $('#post'+ postid).find('img')[0]);
+                                var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
 			                    bg.blur(4)
                             }
 

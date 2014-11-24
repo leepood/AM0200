@@ -24,20 +24,29 @@ function jazzy_input($post) {
     $values = get_post_custom( $post->ID );
     $author = isset( $values['author'] ) ? esc_attr( $values['author'][0] ) : '';
     $name = isset( $values['name'] ) ? esc_attr( $values['name'][0] ) : '';
-    $album = isset( $values['album'] ) ? esc_attr( $values['album'][0] ) : '';
     $audiourl = isset( $values['audiourl'] ) ? esc_attr( $values['audiourl'][0] ) : '';
     print '<p><label style="display: inline-block; width: 60px;" for="author">Author : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'author', true).'" name="author" /></p>'.
           '<p><label style="display: inline-block; width: 60px;" for="name"> Name : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'name', true).'" name="name" /></p>'.
-          '<p><label style="display: inline-block; width: 60px;" for="album">Album : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'album', true).'" name="album" /></p>'.
           '<p><label style="display: inline-block; width: 60px;" for="audiourl">Audio : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'audiourl', true).'" name="audiourl" /></p>';
 }
 add_action( 'save_post', 'jazzy_save' );
 function jazzy_save($post_id) {
     update_post_meta($post_id, 'author', $_POST['author']);
     update_post_meta($post_id, 'name', $_POST['name']);
-    update_post_meta($post_id, 'album', $_POST['album']);
     update_post_meta($post_id, 'audiourl', $_POST['audiourl']);
 }
+
+// IGNORE STICKY POSTS
+function dangopress_alter_main_loop($query)
+{
+    /* Only for main loop in home page */
+    if (!$query->is_home() || !$query->is_main_query())
+        return;
+
+    // ignore sticky posts, don't show them in the start
+    $query->set('ignore_sticky_posts', 1);
+}
+add_action('pre_get_posts', 'dangopress_alter_main_loop'); 
 
 // ADMIN PANL META BOX TOGGLE
 function customadmin() {

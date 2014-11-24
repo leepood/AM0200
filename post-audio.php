@@ -10,14 +10,13 @@ if (is_object($prev)) {
 ?>
 
     <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post audio" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
-        <img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" />
 
-        <?php echo get_post_meta( $post->ID, 'name', true ); ?>
-        <?php echo get_post_meta( $post->ID, 'author', true ); ?>
-        <?php echo get_post_meta( $post->ID, 'album', true ); ?>
+        <div class="player">
+            <img id="img<?php the_ID(); ?>" width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" />
+            <canvas id="blur<?php the_ID(); ?>" class="blur"></canvas>
+            <p><?php echo get_post_meta( $post->ID, 'name', true ); ?></p>
+            <p><?php echo get_post_meta( $post->ID, 'author', true ); ?></p>
+        </div>
 
-        <canvas class="blur"></canvas>
-
-        <audio class="hide" preload="auto" id="audio<?php the_ID(); ?>" src="<?php echo get_post_meta( $post->ID, 'audiourl', true ); ?>"></audio>
-
+        <audio preload="auto" id="audio<?php the_ID(); ?>" src="<?php echo get_post_meta( $post->ID, 'audiourl', true ); ?>"></audio>
     </section>
