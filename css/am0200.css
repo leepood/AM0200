@@ -118,6 +118,7 @@ section {
 img {
     opacity: 0;
 }
+
 #arrow {
     position: fixed;
     right: 10px;
@@ -191,7 +192,6 @@ img {
     margin-left: 4%;
     vertical-align: top;
     display: inline-block;
-    transform: scale(.5);
 }
 .post404 > div {
     margin-left: 1%;
