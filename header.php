@@ -7,11 +7,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="google" content="notranslate" />
+<meta name="author" content="LoeiFy">
 <title><?php bloginfo('name'); ?><?php wp_title( '-', true, 'left' ); ?></title>
 <meta name="keywords" content="design, picture, am0200, inspiration, illustrator, web design, music, jazzy" />
 <meta name="description" content="<?php bloginfo('description') ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> rss feed" href="<?php bloginfo('rss2_url') ?>" />
-<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" />
+<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/font.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/am0200.css" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>

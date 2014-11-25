@@ -25,6 +25,7 @@ header, footer, section, figure {
 }
 img {
     display: block;
+    max-width: 100%;
     height: auto;
 }
 audio {
@@ -210,4 +211,31 @@ img {
 }
 .post404 a {
     color: #222;
+}
+
+.player {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    margin-left: -160px;
+    top: 50%;
+    margin-top: -160px;
+    overflow: hidden;
+    border: 10px solid rgba(255, 255, 255, .7);
+    border-radius: 3px;
+}
+.player img, .canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.canvas {
+    overflow: hidden;
+    border-right: 1px solid rgba(255,255,255,.2);
+    width: 56%;
+}
+.canvas canvas {
+    width: 300px;
+    height: auto;
 }
