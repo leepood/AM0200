@@ -214,6 +214,7 @@ img {
 }
 
 .player {
+    cursor: pointer;
     width: 300px;
     height: 300px;
     position: absolute;
@@ -224,6 +225,65 @@ img {
     overflow: hidden;
     border: 10px solid rgba(255, 255, 255, .7);
     border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.player:before {
+    opacity: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 100px;
+    left: 120px;
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    z-index: 1;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.player:after {
+    opacity: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 25px solid #fff;
+    border-right: 25px solid transparent;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    top: 115px;
+    left: 139px;
+    z-index: 1;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.player.playing:after {
+    height: 24px;
+    width: 8px;
+    border-top: none;
+    border-bottom: none;
+    border-left: 8px solid #fff;
+    border-right: 8px solid #fff;
+    top: 118px;
+    left: 138px;
+}
+.player:hover:before {
+    opacity: 1;
+    top: 120px;
+}
+.player:hover:after {
+    opacity: 1;
+    top: 135px;
+}
+.player.playing:hover:after {
+    top: 138px;
 }
 .player img, .canvas {
     position: absolute;
@@ -233,9 +293,37 @@ img {
 .canvas {
     overflow: hidden;
     border-right: 1px solid rgba(255,255,255,.2);
-    width: 56%;
+    width: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .canvas canvas {
     width: 300px;
     height: auto;
+}
+.canvas:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 300px;
+    background: #000;
+    opacity: .1;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.player h3 {
+    position: absolute;
+    color: #fff;
+    left: 20px;
+    bottom: 22px;
+    font-size: 18px;
+}
+.player p {
+    position: absolute;
+    color: #fff;
+    left: 20px;
+    bottom: 20px;
+    font-size: 12px;
 }

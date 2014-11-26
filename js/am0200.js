@@ -136,6 +136,7 @@ canvasBlur.prototype.blur = function(i) {
     this.context.globalAlpha = 1;
 }
 
+/*
 function fullImage(id, w, h) {
 	var _height = window.innerHeight,
 	    _width = window.innerWidth,
@@ -149,6 +150,42 @@ function fullImage(id, w, h) {
 
 	$(id).css('left', (_width - $(id).width()) / 2)
     $(id).css('top', (_height - $(id).height()) / 2)
+}
+*/
+
+function playAudio(id, audio) {
+    var playid = $('#audio'+ id);
+
+    playid.attr('src', audio).on('canplay', function() {
+        playid[0].play()
+    }).on('timeupdate', function() {
+        $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
+    }).on('ended', function() {
+        $('#blur'+ id).parent().width(0)
+    })
+
+    $('#player'+ id).hammer({prevent_default: true}).on('tap', function() {
+        if (playid[0].paused || playid[0].ended) {
+            playid[0].play()
+        } else {
+            playid[0].pause()
+        }
+    })
+
+    return playid;
+
+    $('.player').on('click', function() {
+        $(id)[0].pause()
+        $(id)[0].play()
+    })
+    $(id).on("playing", function() {
+        log('playing')
+    })
+    $(id).on("pause", function() {
+        log('pause')
+    })
+    $(id).on('timeupdate', function(e) {
+    })
 }
 
 // define
@@ -216,6 +253,8 @@ $(function($) {
                         if ($('.post').hasClass('audio')) {
                             var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
 			                bg.blur(5)
+
+                            playAudio(postid, $('#post'+ postid).data('audio'))
                         }
 
                         // ajax load post
