@@ -327,6 +327,7 @@ $(function($) {
 
         if ($('#post'+ historystates[position][2]).hasClass('audio')) {
             $('#audio'+ historystates[position][2])[0].play()
+            playerid = historystates[position][2];
         }
     }
 
