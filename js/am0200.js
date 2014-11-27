@@ -153,16 +153,22 @@ function fullImage(id, w, h) {
 }
 */
 
-function playAudio(id, audio) {
+function playAudio(id, audio, callback) {
+    var callback = callback || function() {};
+
     var playid = $('#audio'+ id);
 
     playid.attr('src', audio).on('canplay', function() {
         $('#player'+ id).removeClass('loading').addClass('playing')
-        playid[0].play()
+        //playid[0].play()
     }).on('timeupdate', function() {
         $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
     }).on('ended', function() {
         $('#blur'+ id).parent().width(0)
+        $('#player'+ id).removeClass('playing')
+    }).on('play', function() {
+        $('#player'+ id).addClass('playing')
+    }).on('pause', function() {
         $('#player'+ id).removeClass('playing')
     })
 
@@ -176,12 +182,15 @@ function playAudio(id, audio) {
         }
     })
 
-    return playid;
+    callback()
 }
 
 // define
-var postid,                         // current post id
-    url,                            // ajax load url
+var currentpostid,                  // current post id
+    postid,                         // to load post id
+    url,                            // ajax to load url
+
+    playerid = 0,                   // now playing audio id
 
     loadpost = 3,                   // define preload posts
 
@@ -220,12 +229,13 @@ $(function($) {
     history.replaceState({ url: currenturl, title: currenttitle, position: 0 }, currenttitle, currenturl)
     document.title = currenttitle;
 
-    // save current history state
-    historystates.push([currenturl, currenttitle])
-
     // get current post id and to load url 
     postid = $('.post').data('id');
+    currentpostid = postid;
     url = $('#post'+ postid).data('prev');
+
+    // save current history state
+    historystates.push([currenturl, currenttitle, currentpostid])
 
     // show content
     var imgs = $('.post').find('img');
@@ -245,7 +255,11 @@ $(function($) {
                             var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
 			                bg.blur(5)
 
-                            playAudio(postid, $('#post'+ postid).data('audio'))
+                            playAudio(postid, $('#post'+ postid).data('audio'), function() {
+                                $('#audio'+ postid)[0].play()
+
+                                playerid = postid;
+                            })
                         }
 
                         // ajax load post
@@ -285,6 +299,8 @@ $(function($) {
             position ++;
             sectionMove(position * window.innerHeight, function() {
                 pState(historystates[position][0], historystates[position][1], position)
+
+                playControl()
             })
         } else {
             sectionBottom(position * window.innerHeight)
@@ -297,9 +313,20 @@ $(function($) {
             position --;
             sectionMove(position * window.innerHeight, function() {
                 pState(historystates[position][0], historystates[position][1], position)
+
+                playControl()
             })
         } else {
             sectionTop()
+        }
+    }
+
+    // audio play control
+    function playControl() {
+        if (playerid) $('#audio'+ playerid)[0].pause();
+
+        if ($('#post'+ historystates[position][2]).hasClass('audio')) {
+            $('#audio'+ historystates[position][2])[0].play()
         }
     }
 
@@ -344,7 +371,7 @@ $(function($) {
             var posturl = $('#post'+ postid).data('link'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).data('title');
 
-            historystates.push([posturl, posttitle])    // save post state
+            historystates.push([posturl, posttitle, postid])    // save post state
 
             var imgs = $('#post'+ postid).find('img');
             if (imgs.length) {
@@ -361,6 +388,8 @@ $(function($) {
                             if ($('#post'+ postid).hasClass('audio')) {
                                 var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
 			                    bg.blur(5)
+
+                                playAudio(postid, $('#post'+ postid).data('audio'))
                             }
 
                         }
