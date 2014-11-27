@@ -157,35 +157,26 @@ function playAudio(id, audio) {
     var playid = $('#audio'+ id);
 
     playid.attr('src', audio).on('canplay', function() {
+        $('#player'+ id).removeClass('loading').addClass('playing')
         playid[0].play()
     }).on('timeupdate', function() {
         $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
     }).on('ended', function() {
         $('#blur'+ id).parent().width(0)
+        $('#player'+ id).removeClass('playing')
     })
 
     $('#player'+ id).hammer({prevent_default: true}).on('tap', function() {
         if (playid[0].paused || playid[0].ended) {
             playid[0].play()
+            $('#player'+ id).addClass('playing')
         } else {
             playid[0].pause()
+            $('#player'+ id).removeClass('playing')
         }
     })
 
     return playid;
-
-    $('.player').on('click', function() {
-        $(id)[0].pause()
-        $(id)[0].play()
-    })
-    $(id).on("playing", function() {
-        log('playing')
-    })
-    $(id).on("pause", function() {
-        log('pause')
-    })
-    $(id).on('timeupdate', function(e) {
-    })
 }
 
 // define
