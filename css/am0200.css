@@ -1,12 +1,12 @@
 @charset "utf-8";
 
 /* reset */
-body, div, h1, h2, p {
+body, div, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
     font-weight: normal;
 }
-ul {
+ul, li {
     list-style: none;
 }
 a, a:hover {
@@ -268,8 +268,9 @@ img {
     opacity: 1;
     width: 20px;
     height: 20px;
-    border: 2px solid transparent;
-    border-right: 2px solid #fff;
+    border: 2px solid rgba(255,255,255,.3);
+    border-top: 2px solid rgba(255,255,255,.9);
+    border-left: 2px solid rgba(255,255,255,.9);
     left: 138px;
     top: 138px;
     border-radius: 50%;
@@ -339,4 +340,15 @@ img {
     left: 20px;
     bottom: 20px;
     font-size: 12px;
+}
+
+.post figure {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }

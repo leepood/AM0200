@@ -136,23 +136,6 @@ canvasBlur.prototype.blur = function(i) {
     this.context.globalAlpha = 1;
 }
 
-/*
-function fullImage(id, w, h) {
-	var _height = window.innerHeight,
-	    _width = window.innerWidth,
-        ratio = h / w;
-
-	if (_height / _width > ratio) {
-		$(id).height(_height).width(_height / ratio)
-	} else {
-		$(id).width(_width).height(_width * ratio)
-	}
-
-	$(id).css('left', (_width - $(id).width()) / 2)
-    $(id).css('top', (_height - $(id).height()) / 2)
-}
-*/
-
 function playAudio(id, audio, callback) {
     var callback = callback || function() {};
 
@@ -160,7 +143,6 @@ function playAudio(id, audio, callback) {
 
     playid.attr('src', audio).on('canplay', function() {
         $('#player'+ id).removeClass('loading').addClass('playing')
-        //playid[0].play()
     }).on('timeupdate', function() {
         $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
     }).on('ended', function() {
@@ -170,6 +152,8 @@ function playAudio(id, audio, callback) {
         $('#player'+ id).addClass('playing')
     }).on('pause', function() {
         $('#player'+ id).removeClass('playing')
+    }).on('waiting', function() {
+        $('#player'+ id).removeClass('playing').addClass('loading')
     })
 
     $('#player'+ id).hammer({prevent_default: true}).on('tap', function() {
