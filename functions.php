@@ -11,8 +11,8 @@ function url_box_input($post) {
     $background = isset( $values['background'] ) ? esc_attr( $values['background'][0] ) : '';
     $color = isset( $values['color'] ) ? esc_attr( $values['color'][0] ) : '';
     print '<p><label style="display: inline-block; width: 100px;" for="origin_url">URL : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'origin_url', true).'" name="origin_url" /></p>'.
-          '<p><label style="display: inline-block; width: 100px;" for="background">Background : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'background', true).'" name="background" /></p>'.
-          '<p><label style="display: inline-block; width: 100px;" for="color">Color : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'color', true).'" name="color" /></p>';
+          '<p><label style="display: inline-block; width: 100px;" for="background">Background : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'background', true).'" name="background" /></p>'.
+          '<p><label style="display: inline-block; width: 100px;" for="color">Color : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'color', true).'" name="color" /></p>';
 }
 add_action( 'save_post', 'url_box_save' );
 function url_box_save($post_id) {
