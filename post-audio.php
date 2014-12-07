@@ -13,7 +13,7 @@ if (is_object($prev)) {
 
         <div id="player<?php the_ID() ?>" class="player loading">
             <img id="img<?php the_ID(); ?>" width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" />
-            <div class="canvas"><canvas id="blur<?php the_ID(); ?>" class="blur"></canvas></div>
+            <div class="canvas transition"><canvas id="blur<?php the_ID(); ?>" class="blur"></canvas></div>
             <h3><?php echo get_post_meta( $post->ID, 'name', true ); ?></h3>
             <p><?php echo get_post_meta( $post->ID, 'author', true ); ?></p>
         </div>

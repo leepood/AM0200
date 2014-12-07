@@ -141,20 +141,26 @@ function playAudio(id, audio, callback) {
 
     var playid = $('#audio'+ id);
 
-    playid.attr('src', audio).on('canplay', function() {
-        $('#player'+ id).removeClass('loading').addClass('playing')
-    }).on('timeupdate', function() {
-        $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
-    }).on('ended', function() {
-        $('#blur'+ id).parent().width(0)
-        $('#player'+ id).removeClass('playing')
-    }).on('play', function() {
-        $('#player'+ id).addClass('playing')
-    }).on('pause', function() {
-        $('#player'+ id).removeClass('playing')
-    }).on('waiting', function() {
-        $('#player'+ id).removeClass('playing').addClass('loading')
-    })
+    $('#blur'+ id).parent().width(0)
+
+    setTimeout(function() {
+        $('#blur'+ id).parent().removeClass('transition')
+
+        playid.attr('src', audio).on('canplay', function() {
+            $('#player'+ id).removeClass('loading').addClass('playing')
+        }).on('timeupdate', function() {
+            $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
+        }).on('ended', function() {
+            $('#blur'+ id).parent().addClass('transition').width(0)
+            $('#player'+ id).removeClass('playing')
+        }).on('play', function() {
+            $('#player'+ id).addClass('playing')
+        }).on('pause', function() {
+            $('#player'+ id).removeClass('playing')
+        }).on('waiting', function() {
+            $('#player'+ id).removeClass('playing').addClass('loading')
+        })
+    }, 1000)
 
     $('#player'+ id).hammer({prevent_default: true}).on('tap', function() {
         if (playid[0].paused || playid[0].ended) {

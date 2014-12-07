@@ -306,15 +306,27 @@ img {
 }
 .canvas {
     overflow: hidden;
-    border-right: 1px solid rgba(255,255,255,.2);
-    width: 0;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+    width: 70%;
+}
+.canvas.transition {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 .canvas canvas {
     width: 300px;
     height: auto;
+}
+.canvas:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 300px;
+    width: 1px;
+    background: #fff;
+    opacity: .3;
+    top: 0;
+    right: 0;
 }
 .canvas:after {
     content: '';
