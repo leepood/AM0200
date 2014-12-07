@@ -3,16 +3,22 @@
 // ORIGIN URL
 add_action( 'add_meta_boxes', 'url_box' );
 function url_box() {
-    add_meta_box( 'url_box_id', 'Origin URL', 'url_box_input', 'post', 'normal', 'high' );
+    add_meta_box( 'url_box_id', 'Post Info', 'url_box_input', 'post', 'normal', 'high' );
 }
 function url_box_input($post) {
     $values = get_post_custom( $post->ID );
     $url = isset( $values['origin_url'] ) ? esc_attr( $values['origin_url'][0] ) : '';
-    print '<label style="display: inline-block; width: 50px;" for="origin_url">URL : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'origin_url', true).'" name="origin_url" />';
+    $background = isset( $values['background'] ) ? esc_attr( $values['background'][0] ) : '';
+    $color = isset( $values['color'] ) ? esc_attr( $values['color'][0] ) : '';
+    print '<p><label style="display: inline-block; width: 100px;" for="origin_url">URL : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'origin_url', true).'" name="origin_url" /></p>'.
+          '<p><label style="display: inline-block; width: 100px;" for="background">Background : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'background', true).'" name="background" /></p>'.
+          '<p><label style="display: inline-block; width: 100px;" for="color">Color : </label><input size="50" type="url" value="'.get_post_meta($post->ID, 'color', true).'" name="color" /></p>';
 }
 add_action( 'save_post', 'url_box_save' );
 function url_box_save($post_id) {
     update_post_meta($post_id, 'origin_url', $_POST['origin_url']);
+    update_post_meta($post_id, 'background', $_POST['background']);
+    update_post_meta($post_id, 'color', $_POST['color']);
 }
 
 // JAZZY
