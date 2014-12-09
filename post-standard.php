@@ -29,13 +29,15 @@ $color = get_post_meta( $post->ID, 'color', true );
         <ul style="background: <?php echo $background ?>; color: <?php echo $color ?>"><!--
 
          --><li>
-                <h2><?php the_title(); ?></h2>
-                <?php the_excerpt(); ?>
-                <a href="<?php echo $url ?>">View Original</a>
+                <div class="info">
+                    <h2><?php the_title(); ?></h2>
+                    <?php the_excerpt(); ?>
+                    <a href="<?php echo $url ?>">- View Original -</a>
+                </div>
             </li><!--
 
     <?php foreach ( $attachments as $attachment ) { $img = wp_get_attachment_image_src($attachment->ID,'full'); ?>
-    --><li><img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" /></li><!--
+    --><li><div><img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" /></div></li><!--
     <?php } ?>--></ul>
 
     <?php } ?>
