@@ -25,11 +25,40 @@ function sectionMove(position, f) {
     })
 }
 
+function sliderMove(tag, position, f) {
+    var f = f || function() {};
+    $(tag).animate({'left': - position * window.innerWidth}, 1000, 'easeInOutCirc', function() {
+        if (position == 0) $(tag).css('left', 0);
+        f()
+    })
+}
+
+function leftEnd(tag) {
+    $('<li id="leftli" style="width: 0; height: 100%; display: inline-block"></li>').prependTo(tag)
+    $('#leftli').animate({'width': 30 }, 250, 'easeInOutQuad', function() {
+        $('#leftli').animate({'width': 0 }, 250, 'easeInOutQuad', function() {
+            $('#leftli').remove()
+        })
+    })
+}
+
 function sectionBottom(position) {
     $('#bottom').height(70)
     $('body, html').animate({'scrollTop': position + 30}, 250, 'easeInOutQuad', function() {
         $('body, html').animate({'scrollTop': position}, 250, 'easeInOutQuad', function() {
             $('#bottom').height(0)
+        })
+    })
+}
+
+function rightEnd(tag, position) {
+    var w = $(tag).width();
+    $('<li id="rightli" style="width: 30px; height: 100%; display: inline-block"></li>').appendTo(tag)
+    $(tag).width(w + 30)
+    $(tag).animate({'left': - position - 30}, 250, 'easeInOutQuad', function() {
+        $(tag).animate({'left': - position}, 250, 'easeInOutQuad', function() {
+            $('#rightli').remove()
+            $(tag).width(w)
         })
     })
 }
@@ -199,6 +228,9 @@ var currentpostid,                  // current post id
 
     postnumber = 0,                 // load post number
 
+    sliderPos = 0,                  // slider position
+    totalslider = 0,                // total sliders
+
     mousemark = true,               // mousemove mark
     scrollmark = true;              // can scroll mark
 
@@ -268,6 +300,13 @@ $(function($) {
         }, 1000)
     }
 
+    // get current sliders number
+    if ($('.standard').length) {
+        totalslider = $('.standard li').length;
+        $('.standard ul').css('width', totalslider * window.innerWidth)
+        $('.standard li').css('width', window.innerWidth)
+    }
+
     // on screen size change
     $(window).on('resize orientationchange', function(){
         setTimeout(resizePage, 0)
@@ -308,6 +347,28 @@ $(function($) {
             })
         } else {
             sectionTop()
+        }
+    }
+
+    // slider move left
+    function sliderLeft(id) {
+        if (sliderPos >= 1) {
+            sliderPos --;
+            sliderMove(id, sliderPos)
+        } else {
+            leftEnd(id)
+        }
+    }
+
+    // slider move right
+    function sliderRight(id) {
+        if (sliderPos < totalslider - 1) {
+            sliderPos ++;
+            sliderMove(id, sliderPos, function() {
+                //load image
+            })
+        } else {
+            rightEnd(id, sliderPos * window.innerWidth)
         }
     }
 
@@ -399,6 +460,8 @@ $(function($) {
 
     // keyboard event
     $(document).on('keydown', function(e) {
+
+        var id = '#post'+ historystates[position][2];
         switch (e.keyCode) {
 
             case 40:    // down
@@ -412,9 +475,15 @@ $(function($) {
             break;
 
             case 39:    // right
+                if ($(id).hasClass('standard')) {
+                    sliderRight(id +' ul')
+                }
             break;
 
             case 37:    // left
+                if ($(id).hasClass('standard')) {
+                    sliderLeft(id +' ul')
+                }
             break;
 
             case 9:     // tab
