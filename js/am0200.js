@@ -302,9 +302,7 @@ $(function($) {
 
     // get current sliders number
     if ($('.standard').length) {
-        totalslider = $('.standard li').length;
-        $('.standard ul').css('width', totalslider * window.innerWidth)
-        $('.standard li').css('width', window.innerWidth)
+        sliderInfo('#post'+ historystates[position][2])
     }
 
     // on screen size change
@@ -314,6 +312,15 @@ $(function($) {
 
     // tap or click
     onTap('.post')
+
+    // get slider info
+    function sliderInfo(tag) {
+        sliderPos = 0;
+        totalslider = $(tag).find('li').length;
+        $(tag).find('ul').css('width', totalslider * window.innerWidth)
+        $(tag).find('li').css('width', window.innerWidth)
+        sliderMove(tag +' ul', 0)
+    }
 
     // resize page
     function resizePage() {
@@ -330,6 +337,9 @@ $(function($) {
                 pState(historystates[position][0], historystates[position][1], position)
 
                 playControl()
+
+                var tag = '#post'+ historystates[position][2];
+                if ($(tag).hasClass('standard')) sliderInfo('#post'+ historystates[position][2]);
             })
         } else {
             sectionBottom(position * window.innerHeight)
@@ -344,6 +354,9 @@ $(function($) {
                 pState(historystates[position][0], historystates[position][1], position)
 
                 playControl()
+
+                var tag = '#post'+ historystates[position][2];
+                if ($(tag).hasClass('standard')) sliderInfo('#post'+ historystates[position][2]);
             })
         } else {
             sectionTop()
