@@ -339,7 +339,7 @@ $(function($) {
                 playControl()
 
                 var tag = '#post'+ historystates[position][2];
-                if ($(tag).hasClass('standard')) sliderInfo('#post'+ historystates[position][2]);
+                if ($(tag).hasClass('standard')) sliderInfo(tag);
             })
         } else {
             sectionBottom(position * window.innerHeight)
@@ -356,7 +356,7 @@ $(function($) {
                 playControl()
 
                 var tag = '#post'+ historystates[position][2];
-                if ($(tag).hasClass('standard')) sliderInfo('#post'+ historystates[position][2]);
+                if ($(tag).hasClass('standard')) sliderInfo(tag);
             })
         } else {
             sectionTop()
@@ -517,6 +517,11 @@ $(function($) {
         document.title = states.title;
 
         sectionMove(states.position * window.innerHeight)
+
+        playControl()
+
+        var tag = '#post'+ historystates[states.position][2];
+        if ($(tag).hasClass('standard')) sliderInfo(tag);
     })
 
     // mousescroll event
