@@ -518,9 +518,13 @@ $(function($) {
 
         sectionMove(states.position * window.innerHeight)
 
+        position = states.position;
+        
+        // if audio
         playControl()
 
-        var tag = '#post'+ historystates[states.position][2];
+        // if standard
+        var tag = '#post'+ historystates[position][2];
         if ($(tag).hasClass('standard')) sliderInfo(tag);
     })
 
