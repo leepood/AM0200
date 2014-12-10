@@ -326,6 +326,9 @@ $(function($) {
     function resizePage() {
         $('.post').height(window.innerHeight)
         sectionMove(position * window.innerHeight)
+        $('#post'+ historystates[position][2]).find('ul').css('width', totalslider * window.innerWidth)
+        $('#post'+ historystates[position][2]).find('li').css('width', window.innerWidth)
+        sliderMove('#post'+ historystates[position][2] +' ul', sliderPos)
     }
 
     // page move down
