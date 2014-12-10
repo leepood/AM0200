@@ -101,7 +101,7 @@ function tapPlot(tag, target, f) {
 
         //if (!e.target.id) return;
 
-        f(ey / window.innerHeight)
+        f(ex / window.innerWidth, ey / window.innerHeight)
     })
 }
 
@@ -400,10 +400,27 @@ $(function($) {
 
     // mouse click or tap event
     function onTap(id) {
-        tapPlot(id, '#pot', function(e) {
-            e = e - Math.floor(e);
-            if (e > 0.7) sectionDown();
-            if (e < 0.3) sectionUp();
+        tapPlot(id, '#pot', function(x, y) {
+            x = x - Math.floor(x);
+            y = y - Math.floor(y);
+
+            var id = '#post'+ historystates[position][2];
+
+            if ($(id).hasClass('standard')) {
+                if (x > 0.7) {
+                    sliderRight(id +' ul')
+
+                } else  if (x < 0.3) {
+                    sliderLeft(id +' ul')
+                } else {
+                    if (y > 0.7) sectionDown();
+                    if (y < 0.3) sectionUp();
+                }
+
+            } else {
+                if (y > 0.7) sectionDown();
+                if (y < 0.3) sectionUp();
+            }
         })
     }
 
@@ -494,12 +511,14 @@ $(function($) {
                 if ($(id).hasClass('standard')) {
                     sliderRight(id +' ul')
                 }
+                arrowFlash('#arrow .right')
             break;
 
             case 37:    // left
                 if ($(id).hasClass('standard')) {
                     sliderLeft(id +' ul')
                 }
+                arrowFlash('#arrow .left')
             break;
 
             case 9:     // tab
@@ -555,27 +574,56 @@ $(function($) {
 
     // mouse move event
     $(document).on('mousemove', function(e) {
-        if (urlpath != '/') return;
+        var id = '#post'+ historystates[position][2];
+
         if (mousemark) {
             mousemark = false;
             setTimeout(function() {mousemark = true;}, 100)
 
-            var e = e.offsetY / window.innerHeight;
-            if (e > 0.7) {
-                if (position == totalpost) {
-                    cursorChange('default')
+            var x = e.offsetX / window.innerWidth,
+                y = e.offsetY / window.innerHeight;
+
+            if ($(id).hasClass('standard')) {
+                if (x > 0.7) {
+                    if (sliderPos == totalslider - 1) {
+                        cursorChange('default')
+                    } else {
+                        cursorChange('right')
+                    }
+
+                } else if (x < 0.3) {
+                    if (sliderPos == 0) {
+                        cursorChange('default')
+                    } else {
+                        cursorChange('left')
+                    }
+
                 } else {
-                    cursorChange('down')
-                }
-            } else if (e < 0.3) {
-                if (position == 0) {
-                    cursorChange('default')
-                } else {
-                    cursorChange('up')
+                    updown()
                 }
             } else {
-                cursorChange('default')
+                if (urlpath != '/' ) return;
+                updown()
             }
+
+            function updown() {
+                if (y > 0.7) {
+                    if (position == totalpost) {
+                        cursorChange('default')
+                    } else {
+                        cursorChange('down')
+                    }
+                } else if (y < 0.3) {
+                    if (position == 0) {
+                        cursorChange('default')
+                    } else {
+                        cursorChange('up')
+                    }
+                } else {
+                    cursorChange('default')
+                }
+            }
+
         }
     })
 
@@ -583,20 +631,33 @@ $(function($) {
     $('html').hammer({
         prevent_default: true
     }).on('swipe', function(e) {
+
+        var id = '#post'+ historystates[position][2];
+
         switch (e.direction) {
 
             case 'up':
                 sectionDown()
+                arrowFlash('#arrow .bottom')
             break;
 
             case 'down':
                 sectionUp()
-            break;
-
-            case 'left':
+                arrowFlash('#arrow .top')
             break;
 
             case 'right':
+                if ($(id).hasClass('standard')) {
+                    sliderLeft(id +' ul')
+                }
+                arrowFlash('#arrow .left')
+            break;
+
+            case 'left':
+                if ($(id).hasClass('standard')) {
+                    sliderRight(id +' ul')
+                }
+                arrowFlash('#arrow .right')
             break;
 
         }
