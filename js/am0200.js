@@ -320,6 +320,13 @@ $(function($) {
         $(tag).find('ul').css('width', totalslider * window.innerWidth)
         $(tag).find('li').css('width', window.innerWidth)
         sliderMove(tag +' ul', 0)
+
+        var s = '<div id="dot'+ historystates[position][2] +'" class="dots">';
+        for (var i = 0; i < totalslider; i ++) {
+            s += '<span class="'+ (i == 0 ? 'active' : '') +'"></span>';
+        }
+        s += '</div>';
+        $(tag).append(s)
     }
 
     // resize page
@@ -371,6 +378,7 @@ $(function($) {
         if (sliderPos >= 1) {
             sliderPos --;
             sliderMove(id, sliderPos)
+            $('#dot'+ historystates[position][2] +' span').removeClass('active').eq(sliderPos).addClass('active')
         } else {
             leftEnd(id)
         }
@@ -383,6 +391,7 @@ $(function($) {
             sliderMove(id, sliderPos, function() {
                 //load image
             })
+            $('#dot'+ historystates[position][2] +' span').removeClass('active').eq(sliderPos).addClass('active')
         } else {
             rightEnd(id, sliderPos * window.innerWidth)
         }

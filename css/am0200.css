@@ -448,3 +448,22 @@ img {
     display: block;
     letter-spacing: .5px;
 }
+.dots {
+    position: absolute;
+    width: 100%;
+    bottom: 7%;
+    text-align: center;
+}
+.dots span {
+    display: inline-block;
+    margin: 0 5px; 
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background: #000;
+}
+.dots span.active {
+    background: grey;
+}
