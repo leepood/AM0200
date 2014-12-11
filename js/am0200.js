@@ -321,6 +321,7 @@ $(function($) {
         $(tag).find('li').css('width', window.innerWidth)
         sliderMove(tag +' ul', 0)
 
+        $('.dots').remove()
         var s = '<div id="dot'+ historystates[position][2] +'" class="dots">';
         for (var i = 0; i < totalslider; i ++) {
             s += '<span class="'+ (i == 0 ? 'active' : '') +'"></span>';
