@@ -124,6 +124,7 @@ function cursorChange(dir) {
     $('body').css('cursor', cursor)
 }
 
+/*
 function arrowFlash(id) {
     $('#arrow div').removeClass('active')
     $(id).addClass('active')
@@ -131,6 +132,7 @@ function arrowFlash(id) {
         $(id).removeClass('active')
     }, 200)
 }
+*/
 
 function canvasBlur(ele, img) {
     this.element = ele;
@@ -238,7 +240,8 @@ var currentpostid,                  // current post id
 $(function($) {
 
     // some tag
-    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
+    //$('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
+    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
 
     // to top
     window.scrollTo(0, 0)
@@ -324,7 +327,7 @@ $(function($) {
         $('.dots').remove()
         var s = '<div id="dot'+ historystates[position][2] +'" class="dots">';
         for (var i = 0; i < totalslider; i ++) {
-            s += '<span class="'+ (i == 0 ? 'active' : '') +'"></span>';
+            s += '<span style="background-color: '+ $(tag +' ul').css('color') +'" class="'+ (i == 0 ? 'active' : '') +'"></span>';
         }
         s += '</div>';
         $(tag).append(s)
@@ -509,26 +512,26 @@ $(function($) {
 
             case 40:    // down
                 sectionDown()
-                arrowFlash('#arrow .bottom')
+                //arrowFlash('#arrow .bottom')
             break;
 
             case 38:    // up
                 sectionUp()
-                arrowFlash('#arrow .top')
+                //arrowFlash('#arrow .top')
             break;
 
             case 39:    // right
                 if ($(id).hasClass('standard')) {
                     sliderRight(id +' ul')
                 }
-                arrowFlash('#arrow .right')
+                //arrowFlash('#arrow .right')
             break;
 
             case 37:    // left
                 if ($(id).hasClass('standard')) {
                     sliderLeft(id +' ul')
                 }
-                arrowFlash('#arrow .left')
+                //arrowFlash('#arrow .left')
             break;
 
             case 9:     // tab
@@ -648,26 +651,26 @@ $(function($) {
 
             case 'up':
                 sectionDown()
-                arrowFlash('#arrow .bottom')
+                //arrowFlash('#arrow .bottom')
             break;
 
             case 'down':
                 sectionUp()
-                arrowFlash('#arrow .top')
+                //arrowFlash('#arrow .top')
             break;
 
             case 'right':
                 if ($(id).hasClass('standard')) {
                     sliderLeft(id +' ul')
                 }
-                arrowFlash('#arrow .left')
+                //arrowFlash('#arrow .left')
             break;
 
             case 'left':
                 if ($(id).hasClass('standard')) {
                     sliderRight(id +' ul')
                 }
-                arrowFlash('#arrow .right')
+                //arrowFlash('#arrow .right')
             break;
 
         }

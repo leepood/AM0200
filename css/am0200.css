@@ -120,6 +120,7 @@ img {
     opacity: 0;
 }
 
+/*
 #arrow {
     position: fixed;
     right: 10px;
@@ -187,6 +188,7 @@ img {
     margin-bottom: 4px;
     margin-right: 3px;
 }
+*/
 
 .post404 img {
     margin-top: 8%;
@@ -428,7 +430,7 @@ img {
     height: 40%;
     position: relative;
     left: 10%;
-    top: 40%;
+    top: 35%;
 }
 .info h2 {
     text-transform: uppercase;
@@ -462,8 +464,9 @@ img {
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    background: #000;
+    opacity: .5;
 }
 .dots span.active {
-    background: grey;
+    opacity: .9;
 }
+
