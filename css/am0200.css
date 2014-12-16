@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 /* reset */
+/*
 body, div, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
@@ -75,7 +76,6 @@ body:after {
     100% { -moz-transform:  rotate(360deg); }
 }
 
-/* define */
 section {
     height: 100%;
     background: #f7f7f7;
@@ -84,6 +84,7 @@ section {
     opacity: 0;
     z-index: 1;
 }
+*/
 #pot {
     background: grey;
     position: absolute;
@@ -378,14 +379,9 @@ img {
     display:-moz-box;
     -moz-box-pack:center;
     -moz-box-align:center;
-
     display:-webkit-box;
     -webkit-box-pack:center;
     -webkit-box-align:center;
-
-    display:box;
-    box-pack:center;
-    box-align:center;
     position: relative;
 }
 .standard li div.img:before {
