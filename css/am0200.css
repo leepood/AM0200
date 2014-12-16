@@ -470,3 +470,33 @@ img {
     opacity: .9;
 }
 
+header {
+    position: absolute;
+    top: 7%;
+    width: 80%;
+    margin: 0 10%;
+    z-index: 2;
+    font-size: 16px;
+    opacity: .8;
+}
+.icon-logo {
+    color: rgba(0, 0, 0, .7); 
+    font-size: 20px;
+}
+.icon-share {
+    color: rgba(0, 0, 0, .7); 
+    position: absolute;
+    right: 0;
+    top: 2px;
+}
+
+footer {
+    position: absolute;
+    width: 80%;
+    margin: 0 10%;
+    bottom: 2%;
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: .7;
+    color: rgba(0,0,0,.7);
+}
