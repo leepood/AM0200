@@ -37,7 +37,7 @@ $color = get_post_meta( $post->ID, 'color', true );
                 <div class="info">
                     <h2><?php the_title(); ?></h2>
                     <?php the_excerpt(); ?>
-                    <a href="<?php echo $url ?>">- View Original -</a>
+                    <a target="_blank" href="<?php echo $url ?>">- View Original -</a>
                 </div>
            </li><!--
 
