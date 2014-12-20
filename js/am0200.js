@@ -18,6 +18,10 @@ function log(s) {
     console.log(s)
 }
 
+function touchDevice() {
+	return !!('ontouchstart' in window)
+}
+
 function sectionMove(position, f) {
     var f = f || function() {};
     $('body, html').animate({'scrollTop': position}, 1000, 'easeInOutQuint', function() {
@@ -243,6 +247,8 @@ $(function($) {
     //$('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
     $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
 
+    if (touchDevice()) $('body').addClass('touch');
+
     // to top
     window.scrollTo(0, 0)
     $('.post').css('top', 0)
@@ -316,6 +322,19 @@ $(function($) {
     // tap or click
     onTap('.post')
 
+    iconCk('.post')
+    // logo tap or share tap
+    function iconCk(id) {
+        $(id).find('.icon-logo').hammer({prevent_default: true}).off('tap').on('tap', function() {
+            location.href = '/';
+            return false
+        })
+        $(id).find('.icon-share').hammer({prevent_default: true}).off('tap').on('tap', function() {
+            location.href = $(this).attr('href');
+            return false
+        })
+    }
+
     // get slider info
     function sliderInfo(tag) {
         sliderPos = 0;
@@ -354,6 +373,8 @@ $(function($) {
 
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
+
+                iconCk(tag)
             })
         } else {
             sectionBottom(position * window.innerHeight)
@@ -371,6 +392,8 @@ $(function($) {
 
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
+
+                iconCk(tag)
             })
         } else {
             sectionTop()

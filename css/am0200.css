@@ -294,10 +294,10 @@ img {
     top: 138px;
     left: 138px;
 }
-.player:hover:before {
+.player:hover:before, .touch .player:before {
     opacity: 1;
 }
-.player:hover:after {
+.player:hover:after, .touch .player:after {
     opacity: 1;
 }
 .player img, .canvas {
@@ -346,6 +346,7 @@ img {
     left: 20px;
     bottom: 22px;
     font-size: 18px;
+    opacity: 0;
 }
 .player p {
     position: absolute;
@@ -353,6 +354,10 @@ img {
     left: 20px;
     bottom: 20px;
     font-size: 12px;
+    opacity: 0;
+}
+.player:hover h3, .touch .player h3, .player:hover p, .touch .player p {
+    opacity: 1;
 }
 
 .standard ul {
@@ -390,6 +395,8 @@ img {
     max-width: 98%;
     position: relative;
     z-index: 3;
+    max-height: 70%;
+    width: auto;
 }
 .standard li.imgs:before {
     position: absolute;
