@@ -42,7 +42,7 @@ $color = get_post_meta( $post->ID, 'color', true );
            </li><!--
 
     <?php foreach ( $attachments as $attachment ) { $img = wp_get_attachment_image_src($attachment->ID,'full'); ?>
-    --><li><div class="img"><img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" /></div></li><!--
+    --><li class="imgs"><div><img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" /></div></li><!--
     <?php } ?>--></ul>
 
     <?php } ?>

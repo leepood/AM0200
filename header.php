@@ -13,7 +13,6 @@
 <meta name="description" content="<?php bloginfo('description') ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> rss feed" href="<?php bloginfo('rss2_url') ?>" />
 <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" />
-<!--
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/base.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/font.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icon.css" />
@@ -21,7 +20,7 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/plugin.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/am0200.js"></script>
--->
+<!--
 <style>
 body,div,h1,h2,p,ul,li{margin:0;padding:0;font-weight:normal}ul,li{list-style:none}a,a:hover{text-decoration:none}img,button,input{border:0}button:focus,input:focus,textarea:focus{outline:0}header,footer,section,figure{display:block;margin:0;padding:0}img{display:block;max-width:100%;height:auto}audio{display:none}html,body{background:#f7f7f7;height:100%;font-size:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing:antialiased}body{overflow:hidden;position:relative;font-family:'open_sans'}body:before,body:after{content:'';width:30px;height:30px;display:block;border:3px solid #d2d2d2;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;position:absolute;left:50%;margin-left:-18px;top:50%;margin-top:-18px}body:after{border:3px solid transparent;border-top-color:grey;-webkit-animation:rotate 1s infinite linear;-moz-animation:rotate linear 1s;-moz-animation-iteration-count:infinite}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg)}}@-moz-keyframes rotate{0%{-moz-transform:rotate(0deg)}100%{-moz-transform:rotate(360deg)}}section{height:100%;background:#f7f7f7;position:relative;overflow:hidden;opacity:0;z-index:1}
 </style>
@@ -39,5 +38,6 @@ body,div,h1,h2,p,ul,li{margin:0;padding:0;font-weight:normal}ul,li{list-style:no
 		})
 	});
 </script>
+-->
 </head>
 <body data-posts="<?php $count_posts = wp_count_posts(); echo $published_posts = $count_posts->publish;?>">
