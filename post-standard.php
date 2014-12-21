@@ -47,6 +47,6 @@ $color = get_post_meta( $post->ID, 'color', true );
 
     <?php } ?>
         
-        <footer style="color: <?php echo $color ?>">&copy; AM02:00 &nbsp; swipe, tap, scroll or keyboard to navigator</footer>
+        <footer style="color: <?php echo $color ?>">&copy; AM02:00 &nbsp; <span>swipe, tap, scroll or keyboard to navigator</span></footer>
 
     </section>

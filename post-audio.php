@@ -29,5 +29,5 @@ $author = get_post_meta( $post->ID, 'author', true );
         </div>
 
         <audio id="audio<?php the_ID(); ?>"></audio>
-        <footer>&copy; AM02:00 &nbsp; swipe, tap, scroll or keyboard to navigator</footer>
+        <footer>&copy; AM02:00 &nbsp; <span>swipe, tap, scroll or keyboard to navigator</span></footer>
     </section>

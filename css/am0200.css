@@ -230,14 +230,15 @@ img {
     -moz-border-radius: 3px;
 }
 .player:before {
-    opacity: 0;
     content: '';
     display: block;
     position: absolute;
     width: 60px;
     height: 60px;
-    top: 120px;
-    left: 120px;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
     background: rgba(0,0,0,.5);
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -248,7 +249,6 @@ img {
     transition: opacity 0.5s ease-in-out;
 }
 .player:after {
-    opacity: 0;
     content: '';
     display: block;
     position: absolute;
@@ -258,8 +258,10 @@ img {
     border-right: 25px solid transparent;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    top: 135px;
-    left: 139px;
+    top: 50%;
+    left: 50%;
+    margin-left: -11px;
+    margin-top: -15px;
     z-index: 1;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
@@ -272,8 +274,10 @@ img {
     border: 2px solid rgba(255,255,255,.3);
     border-top: 2px solid rgba(255,255,255,.9);
     border-left: 2px solid rgba(255,255,255,.9);
-    left: 138px;
-    top: 138px;
+    top: 50%;
+    left: 50%;
+    margin-left: -12px;
+    margin-top: -12px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -284,15 +288,21 @@ img {
 .player.loading:before {
     opacity: 1;
 }
+.player.playing:before {
+    opacity: 0;
+}
 .player.playing:after {
+    opacity: 0;
     height: 24px;
     width: 8px;
     border-top: none;
     border-bottom: none;
     border-left: 8px solid #fff;
     border-right: 8px solid #fff;
-    top: 138px;
-    left: 138px;
+    top: 50%;
+    left: 50%;
+    margin-left: -12px;
+    margin-top: -12px;
 }
 .player:hover:before, .touch .player:before {
     opacity: 1;
@@ -346,7 +356,6 @@ img {
     left: 20px;
     bottom: 22px;
     font-size: 18px;
-    opacity: 0;
 }
 .player p {
     position: absolute;
@@ -354,6 +363,8 @@ img {
     left: 20px;
     bottom: 20px;
     font-size: 12px;
+}
+.player.playing h3, .player.playing p {
     opacity: 0;
 }
 .player:hover h3, .touch .player h3, .player:hover p, .touch .player p {
@@ -510,4 +521,35 @@ footer {
     text-transform: uppercase;
     opacity: .7;
     color: rgba(0,0,0,.7);
+}
+
+@media screen and (max-width: 600px) {
+    .player {
+        border: none;
+        width: 240px;
+        height: 240px;
+        margin-left: -120px;
+        margin-top: -120px;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+    }
+    .canvas canvas {
+        width: 240px;
+    }
+
+    .info {
+        top: 23%;
+    }
+    .info h2 {
+        font-size: 20px;
+    }
+    .info p {
+        font-size: 14px;
+        margin-top: 17px;
+    }
+
+    footer span {
+        display: none;
+    }
 }
