@@ -377,6 +377,7 @@ img {
     overflow: hidden;
     position: relative;
     left: 0;
+    z-index: -1;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
 }
@@ -497,7 +498,7 @@ header {
     top: 7%;
     width: 80%;
     margin: 0 10%;
-    z-index: 2;
+    z-index: 5;
     font-size: 16px;
     opacity: .8;
 }
@@ -518,12 +519,22 @@ footer {
     margin: 0 10%;
     bottom: 2%;
     font-size: 12px;
+    z-index: 5;
     text-transform: uppercase;
     opacity: .7;
     color: rgba(0,0,0,.7);
 }
 
 @media screen and (max-width: 600px) {
+    header {
+        margin: 0 7%;
+        top: 5%;
+        width: 86%;
+    }
+    header a {
+        padding: 3px 0;
+    }
+
     .player {
         border: none;
         width: 240px;
@@ -540,6 +551,8 @@ footer {
 
     .info {
         top: 23%;
+        width: 86%;
+        left: 7%;
     }
     .info h2 {
         font-size: 20px;
@@ -548,7 +561,14 @@ footer {
         font-size: 14px;
         margin-top: 17px;
     }
+    .info a {
+        margin-top: 16px;
+    }
 
+    footer {
+        width: 86%;
+        margin: 0 7%;
+    }
     footer span {
         display: none;
     }

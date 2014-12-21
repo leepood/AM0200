@@ -182,7 +182,11 @@ function playAudio(id, audio, callback) {
         $('#blur'+ id).parent().removeClass('transition')
 
         playid.attr('src', audio).on('canplay', function() {
-            $('#player'+ id).removeClass('loading').addClass('playing')
+            if (touchDevice()) {
+                $('#player'+ id).removeClass('loading').removeClass('playing')
+            } else {
+                $('#player'+ id).removeClass('loading').addClass('playing')
+            }
         }).on('timeupdate', function() {
             $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
         }).on('ended', function() {
@@ -332,6 +336,12 @@ $(function($) {
         $(id).find('.icon-share').hammer({prevent_default: true}).off('tap').on('tap', function() {
             location.href = $(this).attr('href');
             return false
+        })
+        $(id).find('.info').find('a').hammer({prevent_default: true}).off('tap').on('tap', function() {
+            if (touchDevice) {
+                window.open($(this).attr('href'))
+                return false;
+            }
         })
     }
 
