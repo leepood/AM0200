@@ -182,7 +182,7 @@ function playAudio(id, audio, callback) {
         $('#blur'+ id).parent().removeClass('transition')
 
         // touch devices can not autoplay
-        if (touchDevice()) $('#player'+ id).removeClass('loading').addClass('playing');
+        if (touchDevice()) $('#player'+ id).removeClass('loading');
 
         playid.attr('src', audio).on('canplay', function() {
             $('#player'+ id).removeClass('loading').addClass('playing')
@@ -246,16 +246,16 @@ var currentpostid,                  // current post id
 // ready !
 $(function($) {
 
+    // to top
+    window.scrollTo(0, 0)
+    $('.post').css('top', 0)
+    setTimeout(resizePage, 0)
+
     // some tag
     //$('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
     $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
 
     if (touchDevice()) $('body').addClass('touch');
-
-    // to top
-    window.scrollTo(0, 0)
-    $('.post').css('top', 0)
-    setTimeout(resizePage, 0)
 
     // replace current history state
     currenturl = $('.post').data('link') || window.location.href;
@@ -338,8 +338,8 @@ $(function($) {
         })
         $(id).find('.info').find('a').hammer({prevent_default: true}).off('tap').on('tap', function() {
             if (touchDevice()) {
-                window.open($(this).attr('href'))
-                return false;
+                location.href = $(this).attr('href');
+                return false
             }
         })
     }
