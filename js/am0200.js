@@ -181,12 +181,11 @@ function playAudio(id, audio, callback) {
     setTimeout(function() {
         $('#blur'+ id).parent().removeClass('transition')
 
+        // touch devices can not autoplay
+        if (touchDevice()) $('#player'+ id).removeClass('loading').addClass('playing');
+
         playid.attr('src', audio).on('canplay', function() {
-            if (touchDevice()) {
-                $('#player'+ id).removeClass('loading').removeClass('playing')
-            } else {
-                $('#player'+ id).removeClass('loading').addClass('playing')
-            }
+            $('#player'+ id).removeClass('loading').addClass('playing')
         }).on('timeupdate', function() {
             $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
         }).on('ended', function() {
@@ -338,7 +337,7 @@ $(function($) {
             return false
         })
         $(id).find('.info').find('a').hammer({prevent_default: true}).off('tap').on('tap', function() {
-            if (touchDevice) {
+            if (touchDevice()) {
                 window.open($(this).attr('href'))
                 return false;
             }
@@ -645,14 +644,24 @@ $(function($) {
                     }
 
                 } else {
-                    updown()
+                    if (y > 0.7) {
+                        if (position == totalpost) {
+                            cursorChange('default')
+                        } else {
+                            cursorChange('down')
+                        }
+                    } else if (y < 0.3) {
+                        if (position == 0) {
+                            cursorChange('default')
+                        } else {
+                            cursorChange('up')
+                        }
+                    } else {
+                        cursorChange('default')
+                    }
                 }
             } else {
                 if (urlpath != '/' ) return;
-                updown()
-            }
-
-            function updown() {
                 if (y > 0.7) {
                     if (position == totalpost) {
                         cursorChange('default')
