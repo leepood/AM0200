@@ -28,6 +28,6 @@ $author = get_post_meta( $post->ID, 'author', true );
             <p><?php echo $author ?></p>
         </div>
 
-        <audio id="audio<?php the_ID(); ?>"></audio>
+        <audio controls="controls" id="audio<?php the_ID(); ?>"></audio>
         <footer>&copy; AM02:00 &nbsp; <span>swipe, tap, scroll or keyboard to navigator</span></footer>
     </section>

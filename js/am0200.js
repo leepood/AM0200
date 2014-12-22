@@ -181,11 +181,12 @@ function playAudio(id, audio, callback) {
     setTimeout(function() {
         $('#blur'+ id).parent().removeClass('transition')
 
-        // touch devices can not autoplay
-        if (touchDevice()) $('#player'+ id).removeClass('loading');
-
         playid.attr('src', audio).on('canplay', function() {
-            $('#player'+ id).removeClass('loading').addClass('playing')
+            if (!touchDevice()) {
+                $('#player'+ id).removeClass('loading').addClass('playing')
+            } else {
+                $('#player'+ id).removeClass('loading')
+            }
         }).on('timeupdate', function() {
             $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
         }).on('ended', function() {
@@ -197,6 +198,8 @@ function playAudio(id, audio, callback) {
             $('#player'+ id).removeClass('playing')
         }).on('waiting', function() {
             $('#player'+ id).removeClass('playing').addClass('loading')
+        }).on('error', function() {
+            alert('can not play, please reload page')
         })
     }, 1000)
 
@@ -290,7 +293,7 @@ $(function($) {
 			                bg.blur(5)
 
                             playAudio(postid, $('#post'+ postid).data('audio'), function() {
-                                $('#audio'+ postid)[0].play()
+                                if (!touchDevice()) $('#audio'+ postid)[0].play();
 
                                 playerid = postid;
                             })
@@ -717,5 +720,7 @@ $(function($) {
 
         }
     })
+
+    console.info("https://github.com/LoeiFy")
 
 })
