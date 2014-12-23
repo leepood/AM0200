@@ -29,6 +29,8 @@ img {
 }
 audio {
     display: none;
+    visibility: hidden;
+    position: absolute;
 }
 html, body {
     background: #f7f7f7;

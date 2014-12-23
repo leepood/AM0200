@@ -30,6 +30,8 @@ img {
 }
 audio {
     display: none;
+    position: absolute;
+    visibility: hidden;
 }
 html, body {
     background: #f7f7f7;

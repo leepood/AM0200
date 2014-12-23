@@ -24,14 +24,14 @@ function touchDevice() {
 
 function sectionMove(position, f) {
     var f = f || function() {};
-    $('body, html').animate({'scrollTop': position}, 1000, 'easeInOutQuint', function() {
+    $('body, html').animate({'scrollTop': position}, 700, 'easeInOutQuint', function() {
         f()
     })
 }
 
 function sliderMove(tag, position, f) {
     var f = f || function() {};
-    $(tag).animate({'left': - position * window.innerWidth}, 1000, 'easeInOutCirc', function() {
+    $(tag).animate({'left': - position * window.innerWidth}, 700, 'easeInOutCirc', function() {
         if (position == 0) $(tag).css('left', 0);
         f()
     })
@@ -181,6 +181,9 @@ function playAudio(id, audio, callback) {
     setTimeout(function() {
         $('#blur'+ id).parent().removeClass('transition')
 
+        // touch devices can not autoplay		
+        if (touchDevice()) $('#player'+ id).removeClass('loading');
+
         playid.attr('src', audio).on('canplay', function() {
             if (!touchDevice()) {
                 $('#player'+ id).removeClass('loading').addClass('playing')
@@ -198,8 +201,8 @@ function playAudio(id, audio, callback) {
             $('#player'+ id).removeClass('playing')
         }).on('waiting', function() {
             $('#player'+ id).removeClass('playing').addClass('loading')
-        }).on('error', function() {
-            alert('can not play, please reload page')
+        }).on('playing', function() {
+            $('#player'+ id).removeClass('loading').addClass('playing')
         })
     }, 1000)
 
