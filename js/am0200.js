@@ -103,49 +103,13 @@ function tapPlot(tag, target, f) {
             $(target).css('visibility', 'hidden')
         })
 
-        //if (!e.target.id) return;
-
         f(ex / window.innerWidth, ey / window.innerHeight)
     })
 }
 
-function cursorChange(dir) {
-    var cursor = 'default';
-    switch (dir) {
-        case 'up':
-            cursor = 'n-resize';
-        break;
-        case 'down':
-            cursor = 's-resize';
-        break;
-        case 'left':
-            cursor = 'w-resize';
-        break;
-        case 'right':
-            cursor = 'e-resize';
-        break;
-    }
-    $('body').css('cursor', cursor)
-}
-
-/*
-function arrowFlash(id) {
-    $('#arrow div').removeClass('active')
-    $(id).addClass('active')
-    setTimeout(function() {
-        $(id).removeClass('active')
-    }, 200)
-}
-*/
-
 function canvasBlur(ele, img) {
     this.element = ele;
     this.image = img;
-
-    /*
-    this.element.width = this.image.width;
-    this.element.height = this.image.height;
-    */
 
     this.element.width = this.image.getAttribute('width');
     this.element.height = this.image.getAttribute('height');
@@ -258,7 +222,6 @@ $(function($) {
     setTimeout(resizePage, 0)
 
     // some tag
-    //$('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div><div id="arrow"><div class="top"></div><div class="bottom"></div><div class="left"></div><div class="right"></div></div>')
     $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
 
     if (touchDevice()) $('body').addClass('touch');
@@ -550,26 +513,22 @@ $(function($) {
 
             case 40:    // down
                 sectionDown()
-                //arrowFlash('#arrow .bottom')
             break;
 
             case 38:    // up
                 sectionUp()
-                //arrowFlash('#arrow .top')
             break;
 
             case 39:    // right
                 if ($(id).hasClass('standard')) {
                     sliderRight(id +' ul')
                 }
-                //arrowFlash('#arrow .right')
             break;
 
             case 37:    // left
                 if ($(id).hasClass('standard')) {
                     sliderLeft(id +' ul')
                 }
-                //arrowFlash('#arrow .left')
             break;
 
             case 9:     // tab
@@ -623,71 +582,6 @@ $(function($) {
         }
     })
 
-    // mouse move event
-    $(document).on('mousemove', function(e) {
-        var id = '#post'+ historystates[position][2];
-
-        if (mousemark) {
-            mousemark = false;
-            setTimeout(function() {mousemark = true;}, 100)
-
-            var x = e.offsetX / window.innerWidth,
-                y = e.offsetY / window.innerHeight;
-
-            if ($(id).hasClass('standard')) {
-                if (x > 0.7) {
-                    if (sliderPos == totalslider - 1) {
-                        cursorChange('default')
-                    } else {
-                        cursorChange('right')
-                    }
-
-                } else if (x < 0.3) {
-                    if (sliderPos == 0) {
-                        cursorChange('default')
-                    } else {
-                        cursorChange('left')
-                    }
-
-                } else {
-                    if (y > 0.7) {
-                        if (position == totalpost) {
-                            cursorChange('default')
-                        } else {
-                            cursorChange('down')
-                        }
-                    } else if (y < 0.3) {
-                        if (position == 0) {
-                            cursorChange('default')
-                        } else {
-                            cursorChange('up')
-                        }
-                    } else {
-                        cursorChange('default')
-                    }
-                }
-            } else {
-                if (urlpath != '/' ) return;
-                if (y > 0.7) {
-                    if (position == totalpost) {
-                        cursorChange('default')
-                    } else {
-                        cursorChange('down')
-                    }
-                } else if (y < 0.3) {
-                    if (position == 0) {
-                        cursorChange('default')
-                    } else {
-                        cursorChange('up')
-                    }
-                } else {
-                    cursorChange('default')
-                }
-            }
-
-        }
-    })
-
     // swipe event
     $('html').hammer({
         prevent_default: true
@@ -699,26 +593,22 @@ $(function($) {
 
             case 'up':
                 sectionDown()
-                //arrowFlash('#arrow .bottom')
             break;
 
             case 'down':
                 sectionUp()
-                //arrowFlash('#arrow .top')
             break;
 
             case 'right':
                 if ($(id).hasClass('standard')) {
                     sliderLeft(id +' ul')
                 }
-                //arrowFlash('#arrow .left')
             break;
 
             case 'left':
                 if ($(id).hasClass('standard')) {
                     sliderRight(id +' ul')
                 }
-                //arrowFlash('#arrow .right')
             break;
 
         }
