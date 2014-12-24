@@ -65,14 +65,10 @@ img {
     height: 300px;
     position: absolute;
     left: 50%;
-    margin-left: -160px;
+    margin-left: -150px;
     top: 50%;
-    margin-top: -160px;
+    margin-top: -150px;
     overflow: hidden;
-    border: 10px solid rgba(255, 255, 255, 1);
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
 }
 .player:before {
     content: '';
@@ -345,7 +341,6 @@ header {
     margin: 0 10%;
     z-index: 5;
     font-size: 16px;
-    opacity: .8;
 }
 .icon-logo {
     color: rgba(0, 0, 0, .7); 
@@ -386,9 +381,6 @@ footer {
         height: 240px;
         margin-left: -120px;
         margin-top: -120px;
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
     }
     .canvas canvas {
         width: 240px;

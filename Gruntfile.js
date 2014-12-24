@@ -33,7 +33,17 @@ module.exports = function(grunt) {
                         'css/am0200.css'
                     ]
                 }
-            }
+            },
+
+            base: {
+                options: {
+                },
+                files: {
+                    'dist/base.css': [
+                        'css/base.css'
+                    ]
+                }
+            },
 
         }
 
@@ -44,7 +54,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.registerTask('js', ['uglify:global']);
-    grunt.registerTask('css', ['cssmin:global']);
-    grunt.registerTask('all', ['uglify:global', 'cssmin:global']);
+    grunt.registerTask('css', ['cssmin:global', 'cssmin:base']);
+    grunt.registerTask('all', ['uglify:global', 'cssmin:global', 'cssmin:base']);
 
 };
