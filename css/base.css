@@ -41,7 +41,6 @@ body {
     overflow: hidden;
     position: relative;
     font-family: 'open_sans';
-    cursor: pointer;
 }
 body:before, body:after {
     content: '';

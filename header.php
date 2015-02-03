@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/am0200.css" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/plugin.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/function.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/am0200.js"></script>
 <!--
 <style>

@@ -13,7 +13,6 @@ $name = get_post_meta( $post->ID, 'name', true );
 $author = get_post_meta( $post->ID, 'author', true );
 
 ?>
-
     <section data-audio="<?php echo get_post_meta( $post->ID, 'audiourl', true ); ?>" data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post audio" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
         <header>
@@ -30,4 +29,5 @@ $author = get_post_meta( $post->ID, 'author', true );
 
         <audio controls="controls" id="audio<?php the_ID(); ?>"></audio>
         <footer>&copy; AM02:00 &nbsp; <span>swipe, tap, scroll or keyboard to navigator</span></footer>
+
     </section>

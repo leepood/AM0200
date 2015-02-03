@@ -22,7 +22,6 @@ $background = get_post_meta( $post->ID, 'background', true );
 $color = get_post_meta( $post->ID, 'color', true );
 
 ?>
-
     <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
         <header>
@@ -41,8 +40,8 @@ $color = get_post_meta( $post->ID, 'color', true );
                 </div>
            </li><!--
 
-    <?php foreach ( $attachments as $attachment ) { $img = wp_get_attachment_image_src($attachment->ID,'full'); ?>
-    --><li class="imgs"><div><img width="<?php echo $img[1] ?>" height="<?php echo $img[2] ?>" src="<?php echo $img[0] ?>" /></div></li><!--
+    <?php $i=0; foreach ( $attachments as $attachment ) { $i++; $img = wp_get_attachment_image_src($attachment->ID,'full'); ?>
+    --><li class="imgs"><div id="img<?php the_ID(); echo $i; ?>" data-w="<?php echo $img[1] ?>" data-h="<?php echo $img[2] ?>" data-u="<?php echo $img[0] ?>"></div></li><!--
     <?php } ?>--></ul>
 
     <?php } ?>
