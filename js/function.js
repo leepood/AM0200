@@ -125,54 +125,6 @@ canvasBlur.prototype.blur = function(i) {
     this.context.globalAlpha = 1;
 }
 
-function playAudio(id, audio, callback) {
-    var callback = callback || function() {};
-
-    var playid = $('#audio'+ id);
-
-    $('#blur'+ id).parent().width(0)
-
-    setTimeout(function() {
-        $('#blur'+ id).parent().removeClass('transition')
-
-        // touch devices can not autoplay		
-        if (touchDevice()) $('#player'+ id).removeClass('loading');
-
-        playid.attr('src', audio).on('canplay', function() {
-            if (!touchDevice()) {
-                $('#player'+ id).removeClass('loading').addClass('playing')
-            } else {
-                $('#player'+ id).removeClass('loading')
-            }
-        }).on('timeupdate', function() {
-            $('#blur'+ id).parent().width(playid[0].currentTime / playid[0].duration * 300)
-        }).on('ended', function() {
-            $('#blur'+ id).parent().addClass('transition').width(0)
-            $('#player'+ id).removeClass('playing')
-        }).on('play', function() {
-            $('#player'+ id).addClass('playing')
-        }).on('pause', function() {
-            $('#player'+ id).removeClass('playing')
-        }).on('waiting', function() {
-            $('#player'+ id).removeClass('playing').addClass('loading')
-        }).on('playing', function() {
-            $('#player'+ id).removeClass('loading').addClass('playing')
-        })
-    }, 1000)
-
-    $('#player'+ id).hammer({prevent_default: true}).on('tap', function() {
-        if (playid[0].paused || playid[0].ended) {
-            playid[0].play()
-            $('#player'+ id).addClass('playing')
-        } else {
-            playid[0].pause()
-            $('#player'+ id).removeClass('playing')
-        }
-    })
-
-    callback()
-}
-
 function loadImg(tag) {
     var t = $(tag),
         w = t.data('w'),

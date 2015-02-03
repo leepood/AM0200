@@ -1,5 +1,32 @@
 <?php
 
+// ADMIN PANL META BOX HIDE
+function customadmin() {
+    if ( is_admin() ) {
+        $script = <<< EOF
+<script type='text/javascript'>
+    jQuery(document).ready(function($) {
+        jQuery('#postexcerpt').show()
+        jQuery('#wp-content-editor-container').hide()
+        jQuery('#wp-content-editor-tools .wp-editor-tabs').hide()
+        jQuery('#post-status-info').hide()
+    });
+</script>
+EOF;
+        echo $script;
+    }
+}
+add_action('admin_footer', 'customadmin');
+
+// REMOVE IMAGE CROP
+function remove_default_image_sizes( $sizes) {
+    unset($sizes['thumbnail']);
+    unset($sizes['medium']);
+    unset($sizes['large']);
+    return $sizes;
+}
+add_filter('intermediate_image_sizes_advanced','remove_default_image_sizes');
+
 // ORIGIN URL
 add_action( 'add_meta_boxes', 'url_box' );
 function url_box() {
@@ -21,27 +48,6 @@ function url_box_save($post_id) {
     update_post_meta($post_id, 'color', $_POST['color']);
 }
 
-// JAZZY
-add_action( 'add_meta_boxes', 'jazzy' );
-function jazzy() {
-    add_meta_box( 'jazzy_id', 'INFO', 'jazzy_input', 'post', 'normal', 'high' );
-}
-function jazzy_input($post) {
-    $values = get_post_custom( $post->ID );
-    $author = isset( $values['author'] ) ? esc_attr( $values['author'][0] ) : '';
-    $name = isset( $values['name'] ) ? esc_attr( $values['name'][0] ) : '';
-    $audiourl = isset( $values['audiourl'] ) ? esc_attr( $values['audiourl'][0] ) : '';
-    print '<p><label style="display: inline-block; width: 60px;" for="author">Author : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'author', true).'" name="author" /></p>'.
-          '<p><label style="display: inline-block; width: 60px;" for="name"> Name : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'name', true).'" name="name" /></p>'.
-          '<p><label style="display: inline-block; width: 60px;" for="audiourl">Audio : </label><input size="50" type="text" value="'.get_post_meta($post->ID, 'audiourl', true).'" name="audiourl" /></p>';
-}
-add_action( 'save_post', 'jazzy_save' );
-function jazzy_save($post_id) {
-    update_post_meta($post_id, 'author', $_POST['author']);
-    update_post_meta($post_id, 'name', $_POST['name']);
-    update_post_meta($post_id, 'audiourl', $_POST['audiourl']);
-}
-
 // IGNORE STICKY POSTS
 function dangopress_alter_main_loop($query)
 {
@@ -54,45 +60,6 @@ function dangopress_alter_main_loop($query)
 }
 add_action('pre_get_posts', 'dangopress_alter_main_loop'); 
 
-// ADMIN PANL META BOX TOGGLE
-function customadmin() {
-    if ( is_admin() ) {
-        $script = <<< EOF
-<script type='text/javascript'>
-    jQuery(document).ready(function($) {
-        jQuery('#jazzy_id').hide()
-        jQuery('#postexcerpt').show()
-        jQuery('#post-formats-select input').on('change', function() {
-            toshow()
-        })
-        toshow()
-        function toshow() {
-            if (jQuery('#post-format-0').is(':checked')) {
-                jQuery('#jazzy_id').hide()
-                jQuery('#url_box_id').show()
-                jQuery('#postexcerpt').show()
-                jQuery('#postimagediv').hide()
-                jQuery('#postdivrich').show()
-                jQuery('#wp-content-editor-container').hide()
-                jQuery('#wp-content-editor-tools .wp-editor-tabs').hide()
-                jQuery('#post-status-info').hide()
-            }
-            if (jQuery('#post-format-audio').is(':checked')) {
-                jQuery('#jazzy_id').show()
-                jQuery('#url_box_id').hide()
-                jQuery('#postexcerpt').hide()
-                jQuery('#postdivrich').hide()
-                jQuery('#postimagediv').show()
-            }
-        }
-    });
-</script>
-EOF;
-        echo $script;
-    }
-}
-add_action('admin_footer', 'customadmin');
-
 // REMOVE FONT
 function remove_open_sans() {   
     wp_deregister_style( 'open-sans' );   
@@ -100,15 +67,6 @@ function remove_open_sans() {
     wp_enqueue_style('open-sans','');   
 }   
 add_action( 'init', 'remove_open_sans' );
-
-// MENU SUPPORT
-function register_menu() {
-	register_nav_menu('primary-menu', __('Primary Menu'));
-}
-add_action('init', 'register_menu');
-
-// FEATURED IMAGE SUPPORT
-add_theme_support( 'post-thumbnails', array( 'post' ) );  
 
 // POSTVIEW 
 function getPostViews($postID){
@@ -134,9 +92,6 @@ function setPostViews($postID) {
         update_post_meta($postID, $count_key, $count);
     }
 }
-
-// POST FORMATS
-add_theme_support( 'post-formats', array( 'audio' ));
 
 // LIKETHIS
 function tz_likeThis($post_id,$action = 'get') {

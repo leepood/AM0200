@@ -9,8 +9,6 @@ var currentpostid,                  // current post id
     postid,                         // to load post id
     url,                            // ajax to load url
 
-    playerid = 0,                   // now playing audio id
-
     loadpost = 3,                   // define preload posts
 
     canload = true,                 // ajax can load mark
@@ -70,18 +68,6 @@ $(function($) {
                 if (imgloaded >= imgs.length) {
                     setTimeout(function() {
                         $('.post').animate({'opacity': 1}, 200, 'ease')
-
-                        // blur img
-                        if ($('.post').hasClass('audio')) {
-                            var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
-			                bg.blur(5)
-
-                            playAudio(postid, $('#post'+ postid).data('audio'), function() {
-                                if (!touchDevice()) $('#audio'+ postid)[0].play();
-
-                                playerid = postid;
-                            })
-                        }
 
                         // ajax load post
                         if (url && urlpath == '/') toLoad();
@@ -165,8 +151,6 @@ $(function($) {
             sectionMove(position * window.innerHeight, function() {
                 pState(historystates[position][0], historystates[position][1], position)
 
-                playControl()
-
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
 
@@ -183,8 +167,6 @@ $(function($) {
             position --;
             sectionMove(position * window.innerHeight, function() {
                 pState(historystates[position][0], historystates[position][1], position)
-
-                playControl()
 
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
@@ -217,16 +199,6 @@ $(function($) {
             $('#dot'+ historystates[position][2] +' span').removeClass('active').eq(sliderPos).addClass('active')
         } else {
             rightEnd(id, sliderPos * window.innerWidth)
-        }
-    }
-
-    // audio play control
-    function playControl() {
-        if (playerid) $('#audio'+ playerid)[0].pause();
-
-        if ($('#post'+ historystates[position][2]).hasClass('audio')) {
-            $('#audio'+ historystates[position][2])[0].play()
-            playerid = historystates[position][2];
         }
     }
 
@@ -300,15 +272,6 @@ $(function($) {
                         imgloaded ++;
                         if (imgloaded >= imgs.length) {
                             setTimeout(function() {$('#loading').hide()}, 1000)
-
-                            // blur img
-                            if ($('#post'+ postid).hasClass('audio')) {
-                                var bg = new canvasBlur($('#blur'+ postid)[0], $('#img'+ postid)[0]);
-			                    bg.blur(5)
-
-                                playAudio(postid, $('#post'+ postid).data('audio'))
-                            }
-
                         }
                     })
                 })
@@ -370,9 +333,6 @@ $(function($) {
 
         position = states.position;
         
-        // if audio
-        playControl()
-
         // if standard
         var tag = '#post'+ historystates[position][2];
         if ($(tag).hasClass('standard')) sliderInfo(tag);
