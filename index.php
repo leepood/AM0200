@@ -29,10 +29,6 @@ $color = get_post_meta( $post->ID, 'color', true );
 ?>
     <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
-        <header>
-            <a style="color: <?php echo $color ?>" class="icon-logo" href="/" title="back to home"></a>
-            <a style="color: <?php echo $color ?>" class="icon-share" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey='].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" title="weibo"></a>
-        </header>
     <?php $attachments = get_posts($args); if ($attachments) { ?>
 
         <ul style="background: <?php echo $background ?>; color: <?php echo $color ?>"><!--
@@ -51,8 +47,6 @@ $color = get_post_meta( $post->ID, 'color', true );
 
     <?php } ?>
         
-        <footer style="color: <?php echo $color ?>">&copy; AM02:00 &nbsp; <span>swipe, tap, scroll or keyboard to navigator</span></footer>
-
     </section>
 
 <?php endif; endwhile; endif; ?>
