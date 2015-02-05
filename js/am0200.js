@@ -104,14 +104,14 @@ $(function($) {
         if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
         if (position < totalpost) {
             position ++;
-            sectionMove(position * window.innerHeight, function() {
+            sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
 
                 var tag = '#post'+ historystates[position][2];
-                if ($(tag).hasClass('standard')) sliderInfo(tag);
+                sliderInfo(tag)
             })
         } else {
-            sectionBottom(position * window.innerHeight)
+            sectionBottom(position)
         }
     }
 
@@ -119,11 +119,11 @@ $(function($) {
     function sectionUp() {
         if (position >= 1) { 
             position --;
-            sectionMove(position * window.innerHeight, function() {
+            sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
 
                 var tag = '#post'+ historystates[position][2];
-                if ($(tag).hasClass('standard')) sliderInfo(tag);
+                sliderInfo(tag)
             })
         } else {
             sectionTop()
@@ -150,7 +150,7 @@ $(function($) {
             })
             $('#dot'+ historystates[position][2] +' span').removeClass('active').eq(sliderPos).addClass('active')
         } else {
-            rightEnd(id, sliderPos * window.innerWidth)
+            rightEnd(id, sliderPos)
         }
     }
 
@@ -162,21 +162,8 @@ $(function($) {
 
             var id = '#post'+ historystates[position][2];
 
-            if ($(id).hasClass('standard')) {
-                if (x > 0.7) {
-                    sliderRight(id +' ul')
-
-                } else  if (x < 0.3) {
-                    sliderLeft(id +' ul')
-                } else {
-                    if (y > 0.7) sectionDown();
-                    if (y < 0.3) sectionUp();
-                }
-
-            } else {
-                if (y > 0.7) sectionDown();
-                if (y < 0.3) sectionUp();
-            }
+            if (x > 0.6) sliderRight(id +' ul');
+            if (x < 0.4) sliderLeft(id +' ul');
         })
     }
 
@@ -253,15 +240,11 @@ $(function($) {
             break;
 
             case 39:    // right
-                if ($(id).hasClass('standard')) {
-                    sliderRight(id +' ul')
-                }
+                sliderRight(id +' ul')
             break;
 
             case 37:    // left
-                if ($(id).hasClass('standard')) {
-                    sliderLeft(id +' ul')
-                }
+                sliderLeft(id +' ul')
             break;
 
             case 9:     // tab
@@ -285,9 +268,8 @@ $(function($) {
 
         position = states.position;
         
-        // if standard
         var tag = '#post'+ historystates[position][2];
-        if ($(tag).hasClass('standard')) sliderInfo(tag);
+        sliderInfo(tag)
     })
 
     // mousescroll event
@@ -330,15 +312,11 @@ $(function($) {
             break;
 
             case 'right':
-                if ($(id).hasClass('standard')) {
-                    sliderLeft(id +' ul')
-                }
+                sliderLeft(id +' ul')
             break;
 
             case 'left':
-                if ($(id).hasClass('standard')) {
-                    sliderRight(id +' ul')
-                }
+                sliderRight(id +' ul')
             break;
 
         }
