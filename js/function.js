@@ -14,7 +14,7 @@ function touchDevice() {
 
 function sectionMove(position, f) {
     var f = f || function() {};
-    $('body, html').animate({'scrollTop': position}, 700, 'easeInOutQuint', function() {
+    $('#wrapper').animate({'top': - position * window.innerHeight}, 700, 'easeInOutQuint', function() {
         f()
     })
 }

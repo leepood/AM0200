@@ -1,5 +1,6 @@
 <?php get_header(); ?>
-<div id="container"><div id="wrapper">
+<div id="container">
+<div id="wrapper">
 
 <?php if (have_posts()) : $count = 0;  while (have_posts()) : the_post(); $count++; if( $count <= 1 ): ?>
 
@@ -27,7 +28,7 @@ $background = get_post_meta( $post->ID, 'background', true );
 $color = get_post_meta( $post->ID, 'color', true );
 
 ?>
-    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post standard" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
+    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
 
     <?php $attachments = get_posts($args); if ($attachments) { ?>
 
@@ -51,6 +52,7 @@ $color = get_post_meta( $post->ID, 'color', true );
 
 <?php endif; endwhile; endif; ?>
 
-</div></div>
+</div>
+</div>
 </body>
 </html>

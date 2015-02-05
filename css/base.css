@@ -73,11 +73,22 @@ body:after {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
 }
+#container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+#wrapper {
+    position: relative;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+}
 section {
     height: 100%;
     background: #fff;
     position: relative;
     overflow: hidden;
     opacity: 0;
-    z-index: 1;
 }

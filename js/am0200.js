@@ -1,5 +1,5 @@
 /**
- * Version: 0.0
+ * Version: 2.0
  * Author: LoeiFy
  * URL: http://lorem.in
  */
@@ -39,8 +39,7 @@ $(function($) {
     if (touchDevice()) $('body').addClass('touch');
 
     // some tag
-    $('.post').before('<div id="top"></div>').after('<div id="loading"></div><div id="bottom"></div><div id="pot"></div>')
-
+    $('#container').after('<div id="loading"></div><div id="pot"></div>')
 
     // replace current history state
     currenturl = $('.post').data('link') || window.location.href;
@@ -57,38 +56,14 @@ $(function($) {
     historystates.push([currenturl, currenttitle, currentpostid])
 
     // show content
-    var imgs = $('.post').find('img');
-    if (imgs.length) {
-        var imgloaded = 0;
-        imgs.each(function() {
-            var img = $(this);
-            $('<img/>').attr("src", img.attr('src')).load(function() {
-                img.animate({'opacity': 1}, 200, 'ease')
-                imgloaded ++;
-                if (imgloaded >= imgs.length) {
-                    setTimeout(function() {
-                        $('.post').animate({'opacity': 1}, 200, 'ease')
-
-                        // ajax load post
-                        if (url && urlpath == '/') toLoad();
-                    }, 1000)
-                }
-            }).error(function() {
-                imgloaded ++;
-            })
-        })
-    } else {
-        setTimeout(function() {
-            $('.post').animate({'opacity': 1}, 200, 'ease')
+    setTimeout(function() {
+        $('.post').animate({'opacity': 1}, 200, 'ease')
             // ajax load post
-            if (url && urlpath == '/') toLoad();
-        }, 1000)
-    }
+        if (url && urlpath == '/') toLoad();
+    }, 1000)
 
     // get current sliders number
-    if ($('.standard').length) {
-        sliderInfo('#post'+ historystates[position][2])
-    }
+    sliderInfo('#post'+ historystates[position][2])
 
     // on screen size change
     $(window).on('resize orientationchange', function(){
@@ -97,25 +72,6 @@ $(function($) {
 
     // tap or click
     onTap('.post')
-
-    iconCk('.post')
-    // logo tap or share tap
-    function iconCk(id) {
-        $(id).find('.icon-logo').hammer({prevent_default: true}).off('tap').on('tap', function() {
-            location.href = '/';
-            return false
-        })
-        $(id).find('.icon-share').hammer({prevent_default: true}).off('tap').on('tap', function() {
-            location.href = $(this).attr('href');
-            return false
-        })
-        $(id).find('.info').find('a').hammer({prevent_default: true}).off('tap').on('tap', function() {
-            if (touchDevice()) {
-                location.href = $(this).attr('href');
-                return false
-            }
-        })
-    }
 
     // get slider info
     function sliderInfo(tag) {
@@ -153,8 +109,6 @@ $(function($) {
 
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
-
-                iconCk(tag)
             })
         } else {
             sectionBottom(position * window.innerHeight)
@@ -170,8 +124,6 @@ $(function($) {
 
                 var tag = '#post'+ historystates[position][2];
                 if ($(tag).hasClass('standard')) sliderInfo(tag);
-
-                iconCk(tag)
             })
         } else {
             sectionTop()
@@ -243,7 +195,7 @@ $(function($) {
         ajaxLoad(url, function(data) {
             postnumber ++;
 
-            var data = $(data).filter('section');
+            var data = $(data).find('section');
             $('#post'+ postid).after(data)
 
             totalpost ++;

@@ -55,37 +55,35 @@
 .post404 a {
     color: #222;
 }
-.standard ul {
+.post ul {
     width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    left: 0;
-    z-index: -1;
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
 }
-.standard li {
+.post li {
     display: inline-block;
     vertical-align: top;
     width: 100%;
     height: 100%;
     position: relative;
 }
-.standard li.imgs div {
+.post li.imgs div {
     width:100%;
     height: 100%;
     position: relative;
     text-align: center;
 }
-.standard li.imgs div:before, .standard li.imgs div:after {
+.post li.imgs div:before, .post li.imgs div:after {
     content: '';
     width: 1%;
     height: 100%;
     display: inline-block;
     vertical-align: middle;
 } 
-.standard li.imgs img {
+.post li.imgs img {
     vertical-align: middle;
     display: inline-block;
     max-width: 98%;
@@ -94,7 +92,7 @@
     max-height: 70%;
     width: auto;
 }
-.standard li.imgs:before {
+.post li.imgs:before {
     position: absolute;
     z-index: 1;
     left: 50%;
@@ -110,7 +108,7 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
 } 
-.standard li.imgs:after {
+.post li.imgs:after {
     position: absolute;
     z-index: 2;
     left: 50%;
