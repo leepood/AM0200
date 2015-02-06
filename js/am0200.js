@@ -58,7 +58,7 @@ $(function($) {
     // show content
     setTimeout(function() {
         $('.post').animate({'opacity': 1}, 200, 'ease')
-        $('body').addClass('done')
+        $('body').addClass('done').css('background-color', $('.post').data('bg'))
             // ajax load post
         if (url && urlpath == '/') toLoad();
     }, 1000)
@@ -110,6 +110,7 @@ $(function($) {
             sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
                 sliderInfo('#post'+ historystates[position][2])
+                $('body').css('background-color', $('#post'+ historystates[position][2]).data('bg'))
 
                 if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
             })
@@ -125,6 +126,7 @@ $(function($) {
             sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
                 sliderInfo('#post'+ historystates[position][2])
+                $('body').css('background-color', $('#post'+ historystates[position][2]).data('bg'))
             })
         } else {
             sectionTop()

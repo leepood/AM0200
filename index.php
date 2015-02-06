@@ -28,7 +28,7 @@ $background = get_post_meta( $post->ID, 'background', true );
 $color = get_post_meta( $post->ID, 'color', true );
 
 ?>
-    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>">
+    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>" data-bg="<?php echo $background ?>">
 
     <?php $attachments = get_posts($args); if ($attachments) { ?>
 
