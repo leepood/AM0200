@@ -1,3 +1,6 @@
+body.done:before, body.done:after {
+    display: none;
+}
 #pot {
     background: grey;
     position: absolute;
@@ -60,7 +63,6 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
 }
 .post li {
@@ -84,13 +86,17 @@
     vertical-align: middle;
 } 
 .post li.imgs img {
+    opacity: 0;
     vertical-align: middle;
     display: inline-block;
     max-width: 98%;
     position: relative;
     z-index: 3;
-    max-height: 70%;
+    max-height: 90%;
     width: auto;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 .post li.imgs:before {
     position: absolute;
@@ -159,7 +165,6 @@
     width: 100%;
     bottom: 7%;
     text-align: center;
-    z-index: 4;
 }
 .dots span {
     display: inline-block;
@@ -175,46 +180,7 @@
     opacity: .9;
 }
 
-header {
-    position: absolute;
-    top: 7%;
-    width: 80%;
-    margin: 0 10%;
-    z-index: 5;
-    font-size: 16px;
-}
-.icon-logo {
-    color: rgba(0, 0, 0, .7); 
-    font-size: 20px;
-}
-.icon-share {
-    color: rgba(0, 0, 0, .7); 
-    position: absolute;
-    right: 0;
-    top: 2px;
-}
-
-footer {
-    position: absolute;
-    width: 80%;
-    margin: 0 10%;
-    bottom: 2%;
-    font-size: 12px;
-    z-index: 5;
-    text-transform: uppercase;
-    opacity: .7;
-    color: rgba(0,0,0,.7);
-}
-
 @media screen and (max-width: 600px) {
-    header {
-        margin: 0 7%;
-        top: 5%;
-        width: 86%;
-    }
-    header a {
-        padding: 3px 0;
-    }
     .info {
         top: 23%;
         width: 86%;
@@ -229,13 +195,5 @@ footer {
     }
     .info a {
         margin-top: 16px;
-    }
-
-    footer {
-        width: 86%;
-        margin: 0 7%;
-    }
-    footer span {
-        display: none;
     }
 }

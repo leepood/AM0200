@@ -14,39 +14,39 @@ function touchDevice() {
 
 function sectionMove(position, f) {
     var f = f || function() {};
-    $('#wrapper').animate({'top': - position * window.innerHeight}, 700, 'easeInOutQuint', function() {
+    $('#wrapper').animate({'top': - position * window.innerHeight}, 500, 'easeInOutQuint', function() {
         f()
     })
 }
 
 function sectionTop() {
-    $('#wrapper').animate({'top': 30}, 250, 'easeInOutQuad', function() {
-        $('#wrapper').animate({'top': 0}, 250, 'easeInOutQuad')
+    $('#wrapper').animate({'top': 30}, 150, 'easeInOutQuad', function() {
+        $('#wrapper').animate({'top': 0}, 150, 'easeInOutQuad')
     })
 }
 
 function sectionBottom(position) {
-    $('#wrapper').animate({'top': - position * window.innerHeight - 30}, 250, 'easeInOutQuad', function() {
-        $('#wrapper').animate({'top': - position * window.innerHeight}, 250, 'easeInOutQuad')
+    $('#wrapper').animate({'top': - position * window.innerHeight - 30}, 150, 'easeInOutQuad', function() {
+        $('#wrapper').animate({'top': - position * window.innerHeight}, 150, 'easeInOutQuad')
     })
 }
 
 function sliderMove(tag, position, f) {
     var f = f || function() {};
-    $(tag).animate({'left': - position * window.innerWidth}, 700, 'easeInOutCirc', function() {
+    $(tag).animate({'left': - position * window.innerWidth}, 500, 'easeInOutCirc', function() {
         f()
     })
 }
 
 function leftEnd(tag) {
-    $(tag).animate({'left': 30}, 250, 'easeInOutQuad', function() {
-        $(tag).animate({'left': 0}, 250, 'easeInOutQuad')
+    $(tag).animate({'left': 30}, 150, 'easeInOutQuad', function() {
+        $(tag).animate({'left': 0}, 150, 'easeInOutQuad')
     })
 }
 
 function rightEnd(tag, position) {
-    $(tag).animate({'left': - position * window.innerWidth - 30}, 250, 'easeInOutQuad', function() {
-        $(tag).animate({'left': - position * window.innerWidth}, 250, 'easeInOutQuad')
+    $(tag).animate({'left': - position * window.innerWidth - 30}, 150, 'easeInOutQuad', function() {
+        $(tag).animate({'left': - position * window.innerWidth}, 150, 'easeInOutQuad')
     })
 }
 
@@ -95,6 +95,7 @@ function loadImg(tag) {
     function getImg() {
         if ($(img).prop('complete')) {
             $(img).appendTo(tag)
+            setTimeout(function() {$(img).css('opacity', 1)}, 1000)
             t.parent().addClass('loaded')
             return;
         }
@@ -104,6 +105,8 @@ function loadImg(tag) {
             height: h
         }).load(function() {
             $(this).appendTo(tag)
+            var that = $(this);
+            setTimeout(function() {that.css('opacity', 1)}, 1000)
             t.parent().addClass('loaded')
         }).error(function() {
             u = u +'?'+ +new Date;

@@ -58,6 +58,7 @@ $(function($) {
     // show content
     setTimeout(function() {
         $('.post').animate({'opacity': 1}, 200, 'ease')
+        $('body').addClass('done')
             // ajax load post
         if (url && urlpath == '/') toLoad();
     }, 1000)
@@ -95,6 +96,7 @@ $(function($) {
     // resize page
     function resizePage() {
         $('.post').height(window.innerHeight)
+        $('#wrapper').height($('.post').length * window.innerHeight)
         sectionMove(position)
         $('#post'+ historystates[position][2]).find('ul').css('width', totalslider * window.innerWidth)
         $('#post'+ historystates[position][2]).find('li').css('width', window.innerWidth)

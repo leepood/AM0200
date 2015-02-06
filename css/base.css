@@ -82,7 +82,6 @@ body:after {
 }
 #wrapper {
     position: relative;
-    -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
 }
 section {
