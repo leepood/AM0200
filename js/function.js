@@ -95,7 +95,7 @@ function loadImg(tag) {
     function getImg() {
         if ($(img).prop('complete')) {
             $(img).appendTo(tag)
-            setTimeout(function() {$(img).css('opacity', 1)}, 1000)
+            setTimeout(function() {$(tag).find('img').css('opacity', 1)}, 1000)
             t.parent().addClass('loaded')
             return;
         }
