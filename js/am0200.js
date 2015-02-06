@@ -75,13 +75,15 @@ $(function($) {
 
     // get slider info
     function sliderInfo(tag) {
+        // reset slider
         sliderPos = 0;
+        $('.dots').remove()
+        $('.post ul').css('left', 0)
+
         totalslider = $(tag).find('li').length;
         $(tag).find('ul').css('width', totalslider * window.innerWidth)
         $(tag).find('li').css('width', window.innerWidth)
-        sliderMove(tag +' ul', 0)
 
-        $('.dots').remove()
         var s = '<div id="dot'+ historystates[position][2] +'" class="dots">';
         for (var i = 0; i < totalslider; i ++) {
             s += '<span style="background-color: '+ $(tag +' ul').css('color') +'" class="'+ (i == 0 ? 'active' : '') +'"></span>';
@@ -93,7 +95,7 @@ $(function($) {
     // resize page
     function resizePage() {
         $('.post').height(window.innerHeight)
-        sectionMove(position * window.innerHeight)
+        sectionMove(position)
         $('#post'+ historystates[position][2]).find('ul').css('width', totalslider * window.innerWidth)
         $('#post'+ historystates[position][2]).find('li').css('width', window.innerWidth)
         sliderMove('#post'+ historystates[position][2] +' ul', sliderPos)
@@ -101,14 +103,13 @@ $(function($) {
 
     // page move down
     function sectionDown() {
-        if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
         if (position < totalpost) {
             position ++;
             sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
+                sliderInfo('#post'+ historystates[position][2])
 
-                var tag = '#post'+ historystates[position][2];
-                sliderInfo(tag)
+                if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
             })
         } else {
             sectionBottom(position)
@@ -121,9 +122,7 @@ $(function($) {
             position --;
             sectionMove(position, function() {
                 pState(historystates[position][0], historystates[position][1], position)
-
-                var tag = '#post'+ historystates[position][2];
-                sliderInfo(tag)
+                sliderInfo('#post'+ historystates[position][2])
             })
         } else {
             sectionTop()
@@ -146,7 +145,7 @@ $(function($) {
         if (sliderPos < totalslider - 1) {
             sliderPos ++;
             sliderMove(id, sliderPos, function() {
-                //load image
+                loadImg('#img'+ historystates[position][2] + sliderPos)
             })
             $('#dot'+ historystates[position][2] +' span').removeClass('active').eq(sliderPos).addClass('active')
         } else {
@@ -198,25 +197,9 @@ $(function($) {
 
             var posturl = $('#post'+ postid).data('link'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).data('title');
-
             historystates.push([posturl, posttitle, postid])    // save post state
 
-            var imgs = $('#post'+ postid).find('img');
-            if (imgs.length) {
-                var imgloaded = 0;
-                imgs.each(function() {
-                    var img = $(this);
-                    $('<img/>').attr("src", img.attr('src')).load(function() {
-                        img.animate({'opacity': 1}, 200, 'ease')
-                        imgloaded ++;
-                        if (imgloaded >= imgs.length) {
-                            setTimeout(function() {$('#loading').hide()}, 1000)
-                        }
-                    })
-                })
-            } else {
-                setTimeout(function() {$('#loading').hide()}, 1000)
-            }
+            setTimeout(function() {$('#loading').hide()}, 1000)
 
             if (url) toLoad();
         }, function() {
@@ -257,19 +240,14 @@ $(function($) {
     // popstate event
     window.addEventListener('popstate', function(e) {
         var states = e.state;
-
-        if (!states) return;    // chrome
-
+        if (!states) return;
         if (urlpath != '/') location.href = '/';    // not home page reload
 
         document.title = states.title;
-
-        sectionMove(states.position * window.innerHeight)
-
         position = states.position;
-        
-        var tag = '#post'+ historystates[position][2];
-        sliderInfo(tag)
+
+        sectionMove(position)
+        sliderInfo('#post'+ historystates[position][2])
     })
 
     // mousescroll event

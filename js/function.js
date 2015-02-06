@@ -84,6 +84,8 @@ function tapPlot(tag, target, f) {
 }
 
 function loadImg(tag) {
+    if ($(tag).parent().hasClass('loaded')) return;
+
     var t = $(tag),
         w = t.data('w'),
         h = t.data('h'),
