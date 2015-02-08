@@ -95,8 +95,10 @@ function loadImg(tag) {
     function getImg() {
         if ($(img).prop('complete')) {
             $(img).appendTo(tag)
-            setTimeout(function() {$(tag).find('img').css('opacity', 1)}, 1000)
-            t.parent().addClass('loaded')
+            setTimeout(function() {
+                $(tag).find('img').css('opacity', 1)
+                t.parent().addClass('loaded')
+            }, 500)
             return;
         }
         $('<img/>').attr({
@@ -106,8 +108,10 @@ function loadImg(tag) {
         }).load(function() {
             $(this).appendTo(tag)
             var that = $(this);
-            setTimeout(function() {that.css('opacity', 1)}, 1000)
-            t.parent().addClass('loaded')
+            setTimeout(function() {
+                that.css('opacity', 1)
+                t.parent().addClass('loaded')
+            }, 500)
         }).error(function() {
             u = u +'?'+ +new Date;
             getImg()

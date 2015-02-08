@@ -59,7 +59,7 @@ $(function($) {
     setTimeout(function() {
         $('.post').animate({'opacity': 1}, 200, 'ease')
         $('body').addClass('done').css('background-color', $('.post').data('bg'))
-            // ajax load post
+        // ajax load post
         if (url && urlpath == '/') toLoad();
     }, 1000)
 
@@ -87,7 +87,7 @@ $(function($) {
 
         var s = '<div id="dot'+ historystates[position][2] +'" class="dots">';
         for (var i = 0; i < totalslider; i ++) {
-            s += '<span style="background-color: '+ $(tag +' ul').css('color') +'" class="'+ (i == 0 ? 'active' : '') +'"></span>';
+            s += '<span style="border-color: '+ $(tag +' ul').css('color') +'" class="'+ (i == 0 ? 'active' : '') +'"></span>';
         }
         s += '</div>';
         $(tag).append(s)

@@ -33,7 +33,6 @@ body.done:before, body.done:after {
   50% { -moz-transform:scale(1.0); }
   100% { -moz-transform:scale(0.3); }
 }
-
 .post404 img {
     margin-top: 8%;
     margin-left: 10%;
@@ -92,48 +91,29 @@ body.done:before, body.done:after {
     max-width: 98%;
     position: relative;
     z-index: 3;
-    max-height: 90%;
+    max-height: 87%;
     width: auto;
-    -webkit-transition: opacity 1s ease-in-out;
-    -moz-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
 }
-.post li.imgs:before {
+.post li.imgs span {
+    display: block;
+    width: 14px;
+    height: 14px;
     position: absolute;
-    z-index: 1;
     left: 50%;
     top: 50%;
-    margin-left: -30px;
-    margin-top: -30px;
-    content: '';
-    display: block;
-    width: 60px;
-    height: 60px;
-    background: rgba(0,0,0,.5);
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-} 
-.post li.imgs:after {
-    position: absolute;
-    z-index: 2;
-    left: 50%;
-    top: 50%;
-    margin-left: -12px;
-    margin-top: -12px;
-    content: '';
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255,255,255,.3);
-    border-top: 2px solid rgba(255,255,255,.9);
-    border-left: 2px solid rgba(255,255,255,.9);
+    margin-left: -7px;
+    margin-top: -7px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    -webkit-animation: rotate 1s infinite linear;
-    -moz-animation: rotate linear 1s;
-    -moz-animation-iteration-count: infinite;
+    -webkit-animation:loading 2s ease-out forwards infinite;
+    -moz-animation:loading 2s ease-out forwards infinite;
+} 
+.post li.imgs.loaded span {
+    display: none;
 }
 .info {
     width: 70%;
@@ -163,21 +143,24 @@ body.done:before, body.done:after {
 .dots {
     position: absolute;
     width: 100%;
-    bottom: 7%;
+    bottom: 2%;
     text-align: center;
 }
 .dots span {
     display: inline-block;
     margin: 0 5px; 
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    opacity: .5;
+    border-width: 2px;
+    border-style: solid;
 }
 .dots span.active {
-    opacity: .9;
+    width: 0;
+    height: 0;
+    border-width: 4px;
 }
 
 @media screen and (max-width: 600px) {
