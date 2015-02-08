@@ -35,6 +35,7 @@ $color = get_post_meta( $post->ID, 'color', true );
         <ul style="background: <?php echo $background ?>; color: <?php echo $color ?>"><!--
 
         --><li class="info">
+                <header style="border-color: <?php echo $color ?>"><span style="background: <?php echo $color ?>"></span></header>
                 <div>
                     <h2><a style="color: <?php echo $color ?>" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?></a></h2>
                     <?php the_excerpt(); ?>

@@ -39,7 +39,7 @@ $(function($) {
     if (touchDevice()) $('body').addClass('touch');
 
     // some tag
-    $('#container').after('<div id="loading"></div><div id="pot"></div>')
+    $('#container').after('<div id="pot"></div>')
 
     // replace current history state
     currenturl = $('.post').data('link') || window.location.href;
@@ -184,7 +184,6 @@ $(function($) {
             return;
         }
 
-        $('#loading').show()
         ajaxLoad(url, function(data) {
             postnumber ++;
 
@@ -205,8 +204,6 @@ $(function($) {
             var posturl = $('#post'+ postid).data('link'),
                 posttitle = hometitle +' - '+ $('#post'+ postid).data('title');
             historystates.push([posturl, posttitle, postid])    // save post state
-
-            setTimeout(function() {$('#loading').hide()}, 1000)
 
             if (url) toLoad();
         }, function() {
