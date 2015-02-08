@@ -59,6 +59,7 @@ $(function($) {
     setTimeout(function() {
         $('.post').animate({'opacity': 1}, 200, 'ease')
         $('body').addClass('done').css('background-color', $('.post').data('bg'))
+        $('#pot').css('background-color', $('.post').data('color'))
         // ajax load post
         if (url && urlpath == '/') toLoad();
     }, 1000)
@@ -111,6 +112,7 @@ $(function($) {
                 pState(historystates[position][0], historystates[position][1], position)
                 sliderInfo('#post'+ historystates[position][2])
                 $('body').css('background-color', $('#post'+ historystates[position][2]).data('bg'))
+                $('#pot').css('background-color', $('#post'+ historystates[position][2]).data('color'))
 
                 if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
             })
@@ -127,6 +129,7 @@ $(function($) {
                 pState(historystates[position][0], historystates[position][1], position)
                 sliderInfo('#post'+ historystates[position][2])
                 $('body').css('background-color', $('#post'+ historystates[position][2]).data('bg'))
+                $('#pot').css('background-color', $('#post'+ historystates[position][2]).data('color'))
             })
         } else {
             sectionTop()

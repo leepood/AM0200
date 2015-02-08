@@ -28,17 +28,16 @@ $background = get_post_meta( $post->ID, 'background', true );
 $color = get_post_meta( $post->ID, 'color', true );
 
 ?>
-    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>" data-bg="<?php echo $background ?>">
+    <section data-title="<?php the_title(); ?>" data-link="<?php the_permalink() ?>" data-prev="<?php echo $previous; ?>" class="post" data-id="<?php the_ID(); ?>" id="post<?php the_ID(); ?>" data-bg="<?php echo $background ?>" data-color="<?php echo $color ?>">
 
     <?php $attachments = get_posts($args); if ($attachments) { ?>
 
         <ul style="background: <?php echo $background ?>; color: <?php echo $color ?>"><!--
 
-        --><li>
-                <div class="info">
-                    <h2><?php the_title(); ?></h2>
+        --><li class="info">
+                <div>
+                    <h2><a style="color: <?php echo $color ?>" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?></a></h2>
                     <?php the_excerpt(); ?>
-                    <a target="_blank" href="<?php echo $url ?>">- View Original -</a>
                 </div>
            </li><!--
 

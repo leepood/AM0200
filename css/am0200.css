@@ -2,7 +2,6 @@ body.done:before, body.done:after {
     display: none;
 }
 #pot {
-    background: grey;
     position: absolute;
     border-radius: 50%;
     visibility: hidden;
@@ -116,11 +115,21 @@ body.done:before, body.done:after {
     display: none;
 }
 .info {
+    text-align: center;
+}
+.info:before, .info:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 1%;
+}
+.info div {
+    padding-bottom: 50px;
     width: 70%;
-    height: 40%;
-    position: relative;
-    left: 10%;
-    top: 35%;
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
 }
 .info h2 {
     text-transform: uppercase;
@@ -130,15 +139,6 @@ body.done:before, body.done:after {
     opacity: .8;
     font-size: 16px;
     margin-top: 30px;
-}
-.info a {
-    font-weight: 700;
-    color: inherit;
-    margin-top: 30px;
-    font-size: 12px;
-    text-transform: uppercase;
-    display: block;
-    letter-spacing: .5px;
 }
 .dots {
     position: absolute;
@@ -164,11 +164,6 @@ body.done:before, body.done:after {
 }
 
 @media screen and (max-width: 600px) {
-    .info {
-        top: 23%;
-        width: 86%;
-        left: 7%;
-    }
     .info h2 {
         font-size: 20px;
     }
