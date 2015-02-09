@@ -81,8 +81,8 @@ body.done:before, body.done:after {
 }
 .info header {
     position: absolute;
-    right: 60px;
-    top: 40px;
+    right: 5%;
+    top: 5%;
     border-width: 3px 0;
     width: 20px;
     border-style: solid;
