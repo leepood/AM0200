@@ -39,7 +39,7 @@ $(function($) {
     $('#container').after('<div id="pot"></div><div class="cover"></div>')
 
     // show about
-    $('body .menu').hammer({prevent_default: true}).on('tap', function(e) {
+    $('.menu').hammer({prevent_default: true}).on('tap', function() {
         $('#container, .cover, .about').addClass('active')
         return false;
     })
@@ -171,7 +171,11 @@ $(function($) {
 
     // mouse click or tap event
     function onTap(id) {
-        tapPlot(id, '#pot', function(x, y) {
+        tapPlot(id, '#pot', function(x, y, u) {
+            if ($(u).hasClass('tolink')) {
+                if (touchDevice()) window.open($(u).attr('href'));
+                return;
+            }
             x = x - Math.floor(x);
             y = y - Math.floor(y);
 
@@ -207,6 +211,11 @@ $(function($) {
             url = $('#post'+ postid).data('prev');
 
             onTap('#post'+ postid)
+
+            $('#post'+ postid +' .menu').hammer({prevent_default: true}).on('tap', function() {
+                $('#container, .cover, .about').addClass('active')
+                return false;
+            })
 
             $('#post'+ postid).height(window.innerHeight).css('opacity', 1)
 

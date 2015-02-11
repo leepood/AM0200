@@ -60,7 +60,8 @@ function tapPlot(tag, target, f) {
         prevent_default: true
     }).on('tap', function(e) {
         var ex = e.position[0].x,
-            ey = e.position[0].y;
+            ey = e.position[0].y,
+            eu = e.originalEvent.target;
         
         $(target).css({
             'visibility': 'visible',
@@ -79,7 +80,7 @@ function tapPlot(tag, target, f) {
             $(target).css('visibility', 'hidden')
         })
 
-        f(ex / window.innerWidth, ey / window.innerHeight)
+        f(ex / window.innerWidth, ey / window.innerHeight, eu)
     })
 }
 

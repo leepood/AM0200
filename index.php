@@ -37,7 +37,7 @@ $color = get_post_meta( $post->ID, 'color', true );
         --><li class="info">
                 <header class="menu" style="color: <?php echo $color ?>"><i class="iconfont">&#xe6cd;</i></header>
                 <div>
-                    <h2><a style="color: <?php echo $color ?>;" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?><i class="iconfont">&#xe624;</i></a></h2>
+                    <h2><a class="tolink" style="color: <?php echo $color ?>;" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?><i class="iconfont">&#xe624;</i></a></h2>
                     <?php the_excerpt(); ?>
                 </div>
            </li><!--
