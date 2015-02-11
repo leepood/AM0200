@@ -56,6 +56,11 @@ $color = get_post_meta( $post->ID, 'color', true );
 </div>
 <div class="about">
     <i class="iconfont close">&#xe603;</i>
+    <div>
+        <h2>About AM0200</h2>
+        <p>The primary purpose of this site is to act as a platform for sharing design inspiration. Hope you enjoy the site and find the inspiration to make some brilliant work of your own.</p>
+        <a href="mailto:loeify@gmail.com">Loeify@gmail.com</a>
+    </div>
 </div>
 </body>
 </html>

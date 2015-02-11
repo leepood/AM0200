@@ -172,13 +172,13 @@ body.done:before, body.done:after {
 }
 .cover.active {
     visibility: visible;
-    opacity: .9;
+    opacity: .7;
 }
 .about {
     position: fixed;
     top: 0px;
-    right: -400px;
-    width: 400px;
+    right: -320px;
+    width: 320px;
     height: 100%;
     background-color: #fff;
     z-index: 5;
@@ -192,8 +192,34 @@ body.done:before, body.done:after {
 .about.active {
     right: 0;
 }
+.about > div {
+    width: 90%;
+    margin-top: 70px;
+    margin-left: 5%;
+}
+.about h2 {
+    color: #222228;
+    font-size: 20px;
+}
+.about p {
+    color: #999;
+    font-size: 14px;
+    margin-top: 20px;
+    line-height: 24px;
+}
+.about a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}
 .close {
     cursor: pointer;
+    font-size: 24px;
+    color: #222228;
+    position: absolute;
+    left: 15px;
+    top: 15px;
 }
 
 @media screen and (max-width: 600px) {
