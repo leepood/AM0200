@@ -9,9 +9,6 @@ ul, li {
 a, a:hover {
     text-decoration: none;
 }
-img, button, input {
-    border: 0;
-}
 header, footer, section, figure {
 	display: block;
 	margin: 0;
