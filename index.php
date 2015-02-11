@@ -35,9 +35,9 @@ $color = get_post_meta( $post->ID, 'color', true );
         <ul style="background: <?php echo $background ?>; color: <?php echo $color ?>"><!--
 
         --><li class="info">
-                <header style="border-color: <?php echo $color ?>"><span style="background: <?php echo $color ?>"></span></header>
+                <header class="menu" style="color: <?php echo $color ?>"><i class="iconfont">&#xe6cd;</i></header>
                 <div>
-                    <h2><a style="color: <?php echo $color ?>" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?></a></h2>
+                    <h2><a style="color: <?php echo $color ?>;" target="_blank" href="<?php echo $url ?>"><?php the_title(); ?><i class="iconfont">&#xe624;</i></a></h2>
                     <?php the_excerpt(); ?>
                 </div>
            </li><!--
@@ -53,6 +53,9 @@ $color = get_post_meta( $post->ID, 'color', true );
 <?php endif; endwhile; endif; ?>
 
 </div>
+</div>
+<div class="about">
+    <i class="iconfont close">&#xe603;</i>
 </div>
 </body>
 </html>

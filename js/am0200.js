@@ -35,11 +35,20 @@ var currentpostid,                  // current post id
 // ready !
 $(function($) {
 
+    // some tag
+    $('#container').after('<div id="pot"></div><div class="cover"></div>')
+
+    // show about
+    $('body .menu').hammer({prevent_default: true}).on('tap', function(e) {
+        $('#container, .cover, .about').addClass('active')
+        return false;
+    })
+    $('.cover, .close').hammer({prevent_default: true}).on('tap', function(e) {
+        $('#container, .cover, .about').removeClass('active')
+    })
+
     setTimeout(resizePage, 0)
     if (touchDevice()) $('body').addClass('touch');
-
-    // some tag
-    $('#container').after('<div id="pot"></div>')
 
     // replace current history state
     currenturl = $('.post').data('link') || window.location.href;

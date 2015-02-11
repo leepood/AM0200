@@ -14,6 +14,7 @@
 <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/base.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/font.css" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icon.css" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/am0200.css" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/plugin.js"></script>

@@ -83,16 +83,8 @@ body.done:before, body.done:after {
     position: absolute;
     right: 5%;
     top: 5%;
-    border-width: 3px 0;
-    width: 20px;
-    border-style: solid;
     cursor: pointer;
-}
-.info header span {
-    display: block;
-    width: 20px;
-    height: 3px;
-    margin: 4px 0;
+    font-size: 36px;
 }
 .info:before, .info:after {
     content: '';
@@ -112,10 +104,19 @@ body.done:before, body.done:after {
     text-transform: uppercase;
     font-size: 36px;
 }
+.info a i {
+    opacity: 0;
+    position: relative;
+    top: -3px;
+    margin-left: 5px;
+}
+.info h2 a:hover i {
+    opacity: .8;
+}
 .info p {
     opacity: .8;
     font-size: 16px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .info p a {
     color: #666;
@@ -141,6 +142,58 @@ body.done:before, body.done:after {
     width: 0;
     height: 0;
     border-width: 4px;
+}
+
+#container {
+    -webkit-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    -moz-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    left: 0;
+}
+#container.active {
+    left: -100px;
+}
+.cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222228;
+    opacity: 0;
+    z-index: 4;
+    -webkit-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    -moz-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-perspective: 1000;
+    visibility: hidden;
+    cursor: pointer;
+}
+.cover.active {
+    visibility: visible;
+    opacity: .9;
+}
+.about {
+    position: fixed;
+    top: 0px;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 5;
+    overflow: auto;
+    -webkit-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    -moz-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+.about.active {
+    right: 0;
+}
+.close {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
