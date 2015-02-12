@@ -22,18 +22,18 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/am0200.js"></script>
 <!--
 <style>
-body,div,h1,h2,p,ul,li{margin:0;padding:0;font-weight:normal}ul,li{list-style:none}a,a:hover{text-decoration:none}img,button,input{border:0}button:focus,input:focus,textarea:focus{outline:0}header,footer,section,figure{display:block;margin:0;padding:0}img{display:block;max-width:100%;height:auto}audio{display:none}html,body{background:#f7f7f7;height:100%;font-size:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing:antialiased}body{overflow:hidden;position:relative;font-family:'open_sans'}body:before,body:after{content:'';width:30px;height:30px;display:block;border:3px solid #d2d2d2;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;position:absolute;left:50%;margin-left:-18px;top:50%;margin-top:-18px}body:after{border:3px solid transparent;border-top-color:grey;-webkit-animation:rotate 1s infinite linear;-moz-animation:rotate linear 1s;-moz-animation-iteration-count:infinite}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}@-moz-keyframes rotate{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}section{height:100%;background:#f7f7f7;position:relative;overflow:hidden;opacity:0;z-index:1}
+body,div,h1,h2,li,p,ul{margin:0;padding:0;font-weight:400}li,ul{list-style:none}a,a:hover{text-decoration:none}figure,footer,header,section{display:block;margin:0;padding:0}img{display:block;max-width:100%;height:auto}body,html{background:#fff;height:100%;font-size:100%;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}body{color:#555;overflow:hidden;position:relative;font-family:open_sans}body:before{background:grey;position:absolute;content:'';display:block;width:14px;height:14px;left:50%;top:50%;margin-left:-7px;margin-top:-7px;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;-webkit-animation:loading 2s ease-out forwards infinite;-moz-animation:loading 2s ease-out forwards infinite}@-webkit-keyframes loading{0%{-webkit-transform:scale(0.3)}50%{-webkit-transform:scale(1)}100%{-webkit-transform:scale(0.3)}}@-moz-keyframes loading{0%{-moz-transform:scale(0.3)}50%{-moz-transform:scale(1)}100%{-moz-transform:scale(0.3)}}#container{width:100%;height:100%;overflow:hidden;position:relative;z-index:1}#wrapper{position:relative;-webkit-backface-visibility:hidden}section{height:100%;position:relative;overflow:hidden;opacity:0}
 </style>
-<script src="<?php echo get_template_directory_uri(); ?>/js/basket.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/basket.js?000"></script>
 <script>
-	basket.require({ url: '<?php echo get_template_directory_uri(); ?>/dist/am0200.css', unique: 4,  execute: false })
+	basket.require({ url: '<?php echo get_template_directory_uri(); ?>/dist/am0200.css', unique: 10,  execute: false })
 	.then(function(responses) {
         _stylesheet.appendStyleSheet(responses[0], function() {});
 		basket.require({ url: '<?php echo get_template_directory_uri(); ?>/js/jquery.js' })
 		.then(function() {
 			basket.require({ url: '<?php echo get_template_directory_uri(); ?>/js/plugin.js', unique: 0 })
 			.then(function() {
-        		basket.require({ url: '<?php echo get_template_directory_uri(); ?>/dist/am0200.js', unique: 6 })
+        		basket.require({ url: '<?php echo get_template_directory_uri(); ?>/dist/am0200.js', unique: 10 })
 			})
 		})
 	});

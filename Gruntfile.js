@@ -7,10 +7,11 @@ module.exports = function(grunt) {
 
             global: {
                 options: {
-                    banner: '/* http://lorem.in  @author Loeify@gmail.com */ \n'
+                    banner: '/* http://lorem.in  @author LoeiFy@gmail.com */ \n'
                 },
                 files: {
                     'dist/am0200.js': [
+                        'js/function.js',
                         'js/am0200.js'
                     ]
                 }
@@ -24,7 +25,7 @@ module.exports = function(grunt) {
 
             global: {
                 options: {
-                    banner: '/* http://lorem.in  @author Loeify@gmail.com */ \n'
+                    banner: '/* http://lorem.in  @author LoeiFy@gmail.com */ \n'
                 },
                 files: {
                     'dist/am0200.css': [
