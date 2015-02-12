@@ -1,4 +1,4 @@
-body.done:before, body.done:after {
+body.done:before {
     display: none;
 }
 #pot {
@@ -7,16 +7,6 @@ body.done:before, body.done:after {
     border-radius: 50%;
     visibility: hidden;
     z-index: 3;
-}
-@-webkit-keyframes loading {
-  0% { -webkit-transform:scale(0.3); }
-  50% { -webkit-transform:scale(1.0); }
-  100% { -webkit-transform:scale(0.3); }
-}
-@-moz-keyframes loading {
-  0% { -moz-transform:scale(0.3); }
-  50% { -moz-transform:scale(1.0); }
-  100% { -moz-transform:scale(0.3); }
 }
 .post ul {
     width: 100%;
@@ -199,7 +189,7 @@ body.done:before, body.done:after {
 }
 .about h2 {
     color: #222228;
-    font-size: 20px;
+    font-size: 18px;
 }
 .about p {
     color: #999;
@@ -218,7 +208,7 @@ body.done:before, body.done:after {
     font-size: 24px;
     color: #222228;
     position: absolute;
-    left: 15px;
+    right: 15px;
     top: 15px;
 }
 

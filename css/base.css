@@ -32,36 +32,32 @@ body {
     position: relative;
     font-family: 'open_sans';
 }
-body:before, body:after {
+body:before {
+    background: grey;
+    position: absolute;
     content: '';
-    width: 30px;
-    height: 30px;
     display: block;
-    border: 3px solid #d2d2d2;
+    width: 14px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -7px;
+    margin-top: -7px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    margin-left: -18px;
-    top: 50%;
-    margin-top: -18px;
+    -webkit-animation:loading 2s ease-out forwards infinite;
+    -moz-animation:loading 2s ease-out forwards infinite;
 }
-body:after {
-    border: 3px solid transparent;
-    border-top-color: grey;
-    -webkit-animation: rotate 1s infinite linear;
-    -moz-animation: rotate linear 1s;
-    -moz-animation-iteration-count: infinite;
+@-webkit-keyframes loading {
+  0% { -webkit-transform:scale(0.3); }
+  50% { -webkit-transform:scale(1.0); }
+  100% { -webkit-transform:scale(0.3); }
 }
-@-webkit-keyframes rotate {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-
-@-moz-keyframes rotate {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+@-moz-keyframes loading {
+  0% { -moz-transform:scale(0.3); }
+  50% { -moz-transform:scale(1.0); }
+  100% { -moz-transform:scale(0.3); }
 }
 #container {
     width: 100%;
