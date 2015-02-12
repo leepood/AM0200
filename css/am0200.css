@@ -187,13 +187,17 @@ body.done:before {
     color: #222228;
     font-size: 18px;
 }
+.about h2 a {
+    color: inherit;
+    opacity: .7;
+}
 .about p {
     color: #999;
     font-size: 14px;
     margin-top: 20px;
     line-height: 24px;
 }
-.about a {
+.about div > a {
     display: inline-block;
     margin-top: 20px;
     color: #666;

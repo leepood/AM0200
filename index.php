@@ -57,7 +57,7 @@ $color = get_post_meta( $post->ID, 'color', true );
 <div class="about">
     <i class="iconfont close">&#xe603;</i>
     <div>
-        <h2>About AM0200</h2>
+        <h2>About <a href="/">AM0200.com</a></h2>
         <p>The primary purpose of this site is to collect creative ideas around the web. Hope you enjoy the site and find the inspiration.</p>
         <a href="mailto:loeify@gmail.com" target="_blank">LoeiFy@gmail.com</a>
     </div>
