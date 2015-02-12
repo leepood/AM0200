@@ -5,32 +5,32 @@
  */
 
 // define
-var currentpostid,                  // current post id
-    postid,                         // to load post id
-    url,                            // ajax to load url
+var currentpostid,                                  // current post id
+    postid,                                         // to load post id
+    url,                                            // ajax to load url
 
-    loadpost = 3,                   // define preload posts
+    loadpost = 3,                                   // define preload posts
 
-    canload = true,                 // ajax can load mark
+    canload = touchDevice() ? false : true,         // ajax can load mark
 
-    totalpost = 0,                  // total post section
-    position = 0,                   // section position
+    totalpost = 0,                                  // total post section
+    position = 0,                                   // section position
 
-    currenturl,                     // current url
-    currenttitle,                   // current title
+    currenturl,                                     // current url
+    currenttitle,                                   // current title
 
-    historystates = new Array,      // history states
+    historystates = new Array,                      // history states
 
     hometitle = document.title.indexOf(' ') != -1 ? document.title.split(' ')[0] : document.title,
-    urlpath = location.pathname,    // if to load more
+    urlpath = location.pathname,                    // if to load more
 
-    postnumber = 0,                 // load post number
+    postnumber = 0,                                 // load post number
 
-    sliderPos = 0,                  // slider position
-    totalslider = 0,                // total sliders
+    sliderPos = 0,                                  // slider position
+    totalslider = 0,                                // total sliders
 
-    mousemark = true,               // mousemove mark
-    scrollmark = true;              // can scroll mark
+    mousemark = true,                               // mousemove mark
+    scrollmark = true;                              // can scroll mark
 
 // ready !
 $(function($) {
@@ -48,7 +48,6 @@ $(function($) {
     })
 
     setTimeout(resizePage, 0)
-    if (touchDevice()) $('body').addClass('touch');
 
     // replace current history state
     currenturl = $('.post').data('link') || window.location.href;
@@ -126,7 +125,11 @@ $(function($) {
                 if (canload && url && urlpath == '/' && ($('section').length > loadpost)) toLoad();
             })
         } else {
-            sectionBottom(position)
+            if (touchDevice() && url) {
+                window.location.href = url 
+            } else {
+                sectionBottom(position)
+            }
         }
     }
 
